@@ -13,6 +13,6 @@ namespace Library.Data.Entities.Models
         public int StudentId { get; set; }
         public Student Student { get; set; }
         public DateTime DateOfRent { get; set; }
-        public DateTime DateOfReturn { get; set; }
+        public DateTime? DateOfReturn { get; set; }
     }
 }

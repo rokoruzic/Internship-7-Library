@@ -135,15 +135,18 @@
     <Compile Include="Entities\Models\BookRent.cs" />
     <Compile Include="Entities\Models\Publisher.cs" />
     <Compile Include="Entities\Models\Student.cs" />
+    <Compile Include="Migrations\20190208230559_InitialCreate.cs" />
+    <Compile Include="Migrations\20190208230559_InitialCreate.designer.cs">
+      <DependentUpon>20190208230559_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
