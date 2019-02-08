@@ -15,6 +15,11 @@ namespace Library.Data.Entities
         {
 
         }
+
+        public LibraryContext()
+        {
+            
+        }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookRent> BookRents { get; set; }
@@ -22,6 +27,10 @@ namespace Library.Data.Entities
         public DbSet<Student> Students { get; set; }
         public DbSet<AuthorBook> AuthorsBooks { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["LibraryDatabase"].ConnectionString);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AuthorBook>()
@@ -49,9 +58,7 @@ namespace Library.Data.Entities
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["LibraryDatabase"].ConnectionString);
-        }
+       
+
     }
 }
