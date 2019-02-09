@@ -15,6 +15,7 @@ namespace Library.Data.Entities.Models
         public BookGenre Genre { get; set; }
         public ICollection<AuthorBook> AuthorsBooks { get; set; }
         public Publisher Publisher { get; set; }
+        public int PublisherId { get; set; }
         public ICollection<BookRent> BookRents { get; set; }
         public bool IsRentActive { get; set; }
 
