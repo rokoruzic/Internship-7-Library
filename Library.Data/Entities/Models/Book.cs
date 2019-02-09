@@ -14,7 +14,6 @@ namespace Library.Data.Entities.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
         public int BookId { get; set; }
-        [Key, Column(Order = 1)]
         public string Name { get; set; }
         public int Pages { get; set; }
         public BookGenre Genre { get; set; }

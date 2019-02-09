@@ -13,7 +13,6 @@ namespace Library.Data.Entities.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
         public int AuthorId { get; set; }
-        [Key, Column(Order = 1)]
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ICollection<AuthorBook> AuthorsBooks { get; set; }
