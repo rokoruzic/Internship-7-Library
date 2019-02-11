@@ -151,6 +151,10 @@
     <Compile Include="Migrations\20190209133112_SeededData.designer.cs">
       <DependentUpon>20190209133112_SeededData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190211191133_RemovedUnneccessaryStudentProperty.cs" />
+    <Compile Include="Migrations\20190211191133_RemovedUnneccessaryStudentProperty.designer.cs">
+      <DependentUpon>20190211191133_RemovedUnneccessaryStudentProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
