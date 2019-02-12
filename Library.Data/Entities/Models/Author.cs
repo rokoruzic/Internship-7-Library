@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Data.Entities.Models
 {
-    public class Author
+    public partial class Author
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -16,6 +16,7 @@ namespace Library.Data.Entities.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ICollection<AuthorBook> AuthorsBooks { get; set; }
+
 
     }
 }

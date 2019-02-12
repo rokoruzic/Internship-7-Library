@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace Library
 {
-    public partial class Form1 : Form
+    public partial class MenuForm : Form
     {
-        public Form1()
+        public MenuForm()
         {
             InitializeComponent();
+        }
+
+        private void StudentsButtonClick(object sender, EventArgs e)
+        {
+            var studentsListForm = new StudentsListForm();
+            studentsListForm.AddRefreshList();
+            studentsListForm.ShowDialog();
+
         }
     }
 }

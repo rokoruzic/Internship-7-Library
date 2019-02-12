@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Library.Data.Entities.Models
 {
-    public class Publisher
+    public partial class Publisher
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
         public int PublisherId { get; set; }
         public string Name { get; set; }
         public ICollection<Book> Books { get; set; }
+
+
     }
 }

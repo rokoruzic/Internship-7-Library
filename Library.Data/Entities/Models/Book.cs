@@ -9,7 +9,7 @@ using Library.Data.Entities.Enums;
 
 namespace Library.Data.Entities.Models
 {
-    public class Book
+    public partial class Book
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -22,6 +22,7 @@ namespace Library.Data.Entities.Models
         public int PublisherId { get; set; }
         public ICollection<BookRent> BookRents { get; set; }
         public bool IsRentActive { get; set; }
+
 
     }
 }
