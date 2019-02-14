@@ -169,6 +169,10 @@
     <Compile Include="Migrations\20190212181132_MadePartialCLassesWIthToStringMethods.designer.cs">
       <DependentUpon>20190212181132_MadePartialCLassesWIthToStringMethods.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190214204423_FixedSomeToStringMethods.cs" />
+    <Compile Include="Migrations\20190214204423_FixedSomeToStringMethods.designer.cs">
+      <DependentUpon>20190214204423_FixedSomeToStringMethods.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentsForms\StudentsEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentsForms\StudentsEditForm.Designer.cs">
+      <DependentUpon>StudentsEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StudentsForms\StudentsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StudentsForms\StudentsEditForm.resx">
+      <DependentUpon>StudentsEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StudentsForms\StudentsListForm.resx">
       <DependentUpon>StudentsListForm.cs</DependentUpon>
     </EmbeddedResource>

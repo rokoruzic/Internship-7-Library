@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Library.Data.Entities;
@@ -23,6 +24,7 @@ namespace Library.Domain.Repositories
             return _libraryContext.Students.FirstOrDefault(x=>x.StudentId==id);
         }
 
+       
         public void AddStudent(Student studentToAdd)
         {
             _libraryContext.Students.Add(studentToAdd);
@@ -53,6 +55,10 @@ namespace Library.Domain.Repositories
             return _libraryContext.Students.ToList();
         }
 
+        public bool IsRentActive(Student studentToCheckRent,List<BookRent> bookRents)
+        {
+            return studentToCheckRent.IsRentActive && bookRents.FirstOrDefault(x=>x.StudentId==studentToCheckRent.StudentId).DateOfReturn==null;
+        }
        
     }
 }

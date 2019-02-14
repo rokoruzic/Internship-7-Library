@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities;
+using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
+using Library.StudentsForms;
 
 namespace Library
 {
@@ -28,6 +30,15 @@ namespace Library
         public void AddRefreshList()
         {
             StudentRepository.GetAllStudents().ForEach(x=>studentsListBox.Items.Add(x));
+        }
+
+        private void EditButtonClick(object sender, EventArgs e)
+        {
+            var selectedStudent = studentsListBox.SelectedItem as Student;
+            var studentsEditForm = new StudentsEditForm(StudentRepository) {SelectedStudent = selectedStudent};
+            studentsEditForm.SetText();
+            studentsEditForm.AddRefreshList();
+            studentsEditForm.ShowDialog();
         }
     }
 }

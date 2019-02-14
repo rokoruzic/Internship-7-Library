@@ -22,8 +22,13 @@ namespace Library
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MenuForm()); 
              var context = new LibraryContext();
-
             var studentRepository = new StudentRepository(context);
+            var bookRepository = new BookRepository(context);
+            var bookRentRepository = new BookRentRepository(context);
+            var authorRepository = new AuthorRepository(context);
+            var publisherRepository = new PublisherRepository(context);
+            var authorBookRepository = new AuthorBookRepository(context);
+            
             
         }
     }

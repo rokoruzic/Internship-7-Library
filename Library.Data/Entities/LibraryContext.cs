@@ -64,13 +64,13 @@ namespace Library.Data.Entities
             //    PublisherId = 1,
             //    IsRentActive = true
             //});
-           
+
             //modelBuilder.Entity<Student>().HasData(new
             //{
             //    StudentId = 1,
             //    FirstName = "Kristian",
             //    LastName = "Zolo",
-            //    DateOfBirth = new DateTime(1994 / 12 / 12),
+            //    DateOfBirth = DateTime.Now.AddYears(-19),
             //    Class = "2.b",
             //    Gender = Gender.Male,
             //    IsRentActive = true
