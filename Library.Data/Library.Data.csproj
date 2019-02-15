@@ -173,6 +173,10 @@
     <Compile Include="Migrations\20190214204423_FixedSomeToStringMethods.designer.cs">
       <DependentUpon>20190214204423_FixedSomeToStringMethods.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190215174920_ChangedBookRentIdFromCompositeToPrimary.cs" />
+    <Compile Include="Migrations\20190215174920_ChangedBookRentIdFromCompositeToPrimary.designer.cs">
+      <DependentUpon>20190215174920_ChangedBookRentIdFromCompositeToPrimary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

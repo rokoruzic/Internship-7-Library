@@ -39,6 +39,7 @@
             this.addRentButton = new System.Windows.Forms.Button();
             this.booksToRentComboBox = new System.Windows.Forms.ComboBox();
             this.isReturnedCheckBox = new System.Windows.Forms.CheckBox();
+            this.saveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // firstNameTextBox
@@ -125,17 +126,27 @@
             this.isReturnedCheckBox.AutoSize = true;
             this.isReturnedCheckBox.Location = new System.Drawing.Point(500, 175);
             this.isReturnedCheckBox.Name = "isReturnedCheckBox";
-            this.isReturnedCheckBox.Size = new System.Drawing.Size(119, 21);
+            this.isReturnedCheckBox.Size = new System.Drawing.Size(123, 21);
             this.isReturnedCheckBox.TabIndex = 12;
-            this.isReturnedCheckBox.Text = "book returned";
+            this.isReturnedCheckBox.Text = "book  returned";
             this.isReturnedCheckBox.UseVisualStyleBackColor = true;
-            this.isReturnedCheckBox.CheckStateChanged += new System.EventHandler(this.IsReturnedCheckBox);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(335, 349);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 13;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
             // StudentsEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.isReturnedCheckBox);
             this.Controls.Add(this.booksToRentComboBox);
             this.Controls.Add(this.addRentButton);
@@ -167,5 +178,6 @@
         private System.Windows.Forms.Button addRentButton;
         private System.Windows.Forms.ComboBox booksToRentComboBox;
         private System.Windows.Forms.CheckBox isReturnedCheckBox;
+        private System.Windows.Forms.Button saveButton;
     }
 }

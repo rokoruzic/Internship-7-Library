@@ -39,8 +39,7 @@ namespace Library.Data.Entities
                 .WithMany(c => c.AuthorsBooks)
                 .HasForeignKey(bc => bc.AuthorId);
 
-            modelBuilder.Entity<BookRent>()
-                .HasKey(bc => new { bc.BookId, bc.StudentId });
+          
             modelBuilder.Entity<BookRent>()
                 .HasOne(bc => bc.Book)
                 .WithMany(b => b.BookRents)

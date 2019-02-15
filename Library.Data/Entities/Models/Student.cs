@@ -20,7 +20,6 @@ namespace Library.Data.Entities.Models
         public string Class { get; set; }
         public Gender Gender { get; set; }
         public ICollection<BookRent> BookRents { get; set; }
-        public bool IsRentActive { get; set; }
 
       
     }

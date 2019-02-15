@@ -33,8 +33,7 @@ namespace Library.StudentsForms
             BookRepository= new BookRepository(LibraryContext);
             dateOfReturnDateTimePicker.Hide();
             datOfRentDateTimePicker.Hide();
-            isReturnedCheckBox.Hide();
-           
+           isReturnedCheckBox.Hide();
         }
 
         public void SetText()
@@ -42,7 +41,6 @@ namespace Library.StudentsForms
             firstNameTextBox.Text = SelectedStudent.FirstName;
             lastNameTextBox.Text = SelectedStudent.LastName;
             classTextBox.Text = SelectedStudent.Class;
-            dateOfBirthDateTimePicker.Value = SelectedStudent.DateOfBirth;
            
            
         }
@@ -71,11 +69,7 @@ namespace Library.StudentsForms
             
         }
 
-        private void IsReturnedCheckBox(object sender, EventArgs e)
-        {
-            dateOfReturnDateTimePicker.Hide();
-            isReturnedCheckBox.Hide();
-        }
+       
 
         private void AddRentButtonClick(object sender, EventArgs e)
         {
@@ -95,10 +89,9 @@ namespace Library.StudentsForms
             getEditedBookRent.DateOfReturn = dateOfReturnDateTimePicker.Value;
             getEditedBookRent.DateOfRent = datOfRentDateTimePicker.Value;
             booksToRentComboBox.Items.Remove(booksToRentComboBox.SelectedItem);
-            if (isReturnedCheckBox.Checked) getEditedBookRent.DateOfReturn = null;
+            if (isReturnedCheckBox.Checked)
+            getEditedBookRent.DateOfReturn = null;
             booksComboBox.Items.Add(getEditedBookRent);
-
-
         }
 
         private void BooksToRentComboBoxSelectedIndexChanged(object sender, EventArgs e)
@@ -107,5 +100,24 @@ namespace Library.StudentsForms
            datOfRentDateTimePicker.Show();
            isReturnedCheckBox.Show();
         }
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            var studentToEdit = new Student();
+            studentToEdit.StudentId = SelectedStudent.StudentId;
+            studentToEdit.Class = classTextBox.Text;
+            studentToEdit.DateOfBirth = dateOfBirthDateTimePicker.Value;
+            studentToEdit.FirstName = firstNameTextBox.Text;
+            studentToEdit.LastName = lastNameTextBox.Text;
+            studentToEdit.Gender = SelectedStudent.Gender;
+            foreach (var bookRent in booksComboBox.Items)
+            {
+                BookRentRepository.EditBookRent(bookRent as BookRent);
+            }
+
+            StudentRepository.EditStudent(studentToEdit);
+        }
+
+       
     }
 }

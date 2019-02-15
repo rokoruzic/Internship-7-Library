@@ -21,7 +21,7 @@ namespace Library.Domain.Repositories
 
         public Student GetStudent(int id)
         {
-            return _libraryContext.Students.FirstOrDefault(x=>x.StudentId==id);
+            return _libraryContext.Students.Include(x=>x.BookRents).FirstOrDefault(x=>x.StudentId==id );
         }
 
        
@@ -45,6 +45,10 @@ namespace Library.Domain.Repositories
             var editedStudent = _libraryContext.Students.FirstOrDefault(x => x.StudentId == studentToEdit.StudentId);
             if (editedStudent == null) return false;
             editedStudent.FirstName = studentToEdit.FirstName;
+            editedStudent.LastName = studentToEdit.LastName;
+            editedStudent.Class = studentToEdit.Class;
+            editedStudent.DateOfBirth = studentToEdit.DateOfBirth;
+            editedStudent.StudentId = studentToEdit.StudentId;
             _libraryContext.SaveChanges();
             return true;
 
@@ -55,10 +59,10 @@ namespace Library.Domain.Repositories
             return _libraryContext.Students.ToList();
         }
 
-        public bool IsRentActive(Student studentToCheckRent,List<BookRent> bookRents)
-        {
-            return studentToCheckRent.IsRentActive && bookRents.FirstOrDefault(x=>x.StudentId==studentToCheckRent.StudentId).DateOfReturn==null;
-        }
+        //public bool IsRentActive(Student studentToCheckRent,List<BookRent> bookRents)
+        //{
+        //    return studentToCheckRent.IsRentActive && bookRents.FirstOrDefault(x=>x.StudentId==studentToCheckRent.StudentId).DateOfReturn==null;
+        //}
        
     }
 }

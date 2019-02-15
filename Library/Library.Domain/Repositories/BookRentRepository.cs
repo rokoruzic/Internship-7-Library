@@ -31,6 +31,19 @@ namespace Library.Domain.Repositories
             return _libraryContext.BookRents.Include(x => x.Book).Include(x => x.Student)
                 .FirstOrDefault(x => x.BookId == bookId && x.StudentId == studentId);
         }
+        public bool EditBookRent(BookRent bookRentToEdit)
+        {
+            var editedBookRent = _libraryContext.BookRents.FirstOrDefault(x => x.BookRentId==bookRentToEdit.BookRentId);
+            if (editedBookRent == null) return false;
+            editedBookRent.BookId = bookRentToEdit.BookId;
+            editedBookRent.Book = bookRentToEdit.Book;
+            editedBookRent.BookRentId = bookRentToEdit.BookRentId;
+            editedBookRent.StudentId = bookRentToEdit.StudentId;
+            editedBookRent.Student = bookRentToEdit.Student;
+            _libraryContext.SaveChanges();
+            return true;
+
+        }
 
     }
 }
