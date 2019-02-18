@@ -62,5 +62,26 @@ namespace Library.BookRentsForms
         {
             booksRentNotActiveListBox.SelectedItem = null;
         }
+
+        private void DeleteBookRentButtonClick(object sender, EventArgs e)
+        {
+            var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
+            if (bookRentActiveListBox.SelectedItem != null)
+                selectedBookRent = bookRentActiveListBox.SelectedItem as BookRent;
+            if (selectedBookRent == null) return;
+            BookRentRepository.RemoveBookRent(selectedBookRent.BookRentId);
+
+        }
+
+        private void ViewBookRentButtonClick(object sender, EventArgs e)
+        {
+            var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
+            if (bookRentActiveListBox.SelectedItem != null)
+                selectedBookRent = bookRentActiveListBox.SelectedItem as BookRent;
+            var bookRentDetailsForm = new BookRentDetailsForm(BookRentRepository, BookRepository, StudentRepository) { SelectedBookRent = selectedBookRent };
+            bookRentDetailsForm.SetText();
+            bookRentDetailsForm.Show();
+
+        }
     }
 }

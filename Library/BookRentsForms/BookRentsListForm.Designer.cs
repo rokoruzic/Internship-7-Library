@@ -88,21 +88,23 @@
             // 
             // viewBookRentButton
             // 
-            this.viewBookRentButton.Location = new System.Drawing.Point(677, 241);
+            this.viewBookRentButton.Location = new System.Drawing.Point(677, 232);
             this.viewBookRentButton.Name = "viewBookRentButton";
             this.viewBookRentButton.Size = new System.Drawing.Size(75, 23);
             this.viewBookRentButton.TabIndex = 5;
             this.viewBookRentButton.Text = "View";
             this.viewBookRentButton.UseVisualStyleBackColor = true;
+            this.viewBookRentButton.Click += new System.EventHandler(this.ViewBookRentButtonClick);
             // 
             // deleteBookRentButton
             // 
-            this.deleteBookRentButton.Location = new System.Drawing.Point(677, 179);
+            this.deleteBookRentButton.Location = new System.Drawing.Point(677, 176);
             this.deleteBookRentButton.Name = "deleteBookRentButton";
             this.deleteBookRentButton.Size = new System.Drawing.Size(75, 23);
             this.deleteBookRentButton.TabIndex = 6;
             this.deleteBookRentButton.Text = "Delete";
             this.deleteBookRentButton.UseVisualStyleBackColor = true;
+            this.deleteBookRentButton.Click += new System.EventHandler(this.DeleteBookRentButtonClick);
             // 
             // editBookRentButton
             // 

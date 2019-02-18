@@ -56,10 +56,10 @@ namespace Library
         {
             var selectedStudent = studentsListBox.SelectedItem as Student;
             StudentRepository.RemoveStudent(selectedStudent.StudentId);
-            var bookRentToDelete = BookRentRepository.GetAllBookRents()
-                .FirstOrDefault(x => x.StudentId == selectedStudent.StudentId);
-            if(bookRentToDelete==null) return;
-            BookRentRepository.RemoveBookRent(bookRentToDelete.BookRentId);
+            //var bookRentToDelete = BookRentRepository.GetAllBookRents()
+            //    .FirstOrDefault(x => x.StudentId == selectedStudent.StudentId);
+            //if(bookRentToDelete==null) return;
+            //BookRentRepository.RemoveBookRent(bookRentToDelete.BookRentId);
 
         }
 
