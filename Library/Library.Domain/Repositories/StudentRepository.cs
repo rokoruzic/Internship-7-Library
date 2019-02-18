@@ -23,8 +23,11 @@ namespace Library.Domain.Repositories
         {
             return _libraryContext.Students.Include(x=>x.BookRents).FirstOrDefault(x=>x.StudentId==id );
         }
+        public List<Student> GetAllStudents()
+        {
+            return _libraryContext.Students.Include(x => x.BookRents).ToList();
+        }
 
-       
         public void AddStudent(Student studentToAdd)
         {
             _libraryContext.Students.Add(studentToAdd);
@@ -49,14 +52,19 @@ namespace Library.Domain.Repositories
             editedStudent.Class = studentToEdit.Class;
             editedStudent.DateOfBirth = studentToEdit.DateOfBirth;
             editedStudent.StudentId = studentToEdit.StudentId;
+            //editedStudent.BookRents = studentToEdit.BookRents;
+            //_libraryContext.Attach(studentToEdit.BookRents);
+
             _libraryContext.SaveChanges();
             return true;
 
         }
 
-        public List<Student> GetAllStudents()
+       
+
+        public int GetNewId()
         {
-            return _libraryContext.Students.ToList();
+            return _libraryContext.Students.Count() + 1;
         }
 
         //public bool IsRentActive(Student studentToCheckRent,List<BookRent> bookRents)

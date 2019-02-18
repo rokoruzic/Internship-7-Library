@@ -177,6 +177,10 @@
     <Compile Include="Migrations\20190215174920_ChangedBookRentIdFromCompositeToPrimary.designer.cs">
       <DependentUpon>20190215174920_ChangedBookRentIdFromCompositeToPrimary.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190216202752_RemovedIsRentedPropFromBook.cs" />
+    <Compile Include="Migrations\20190216202752_RemovedIsRentedPropFromBook.designer.cs">
+      <DependentUpon>20190216202752_RemovedIsRentedPropFromBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

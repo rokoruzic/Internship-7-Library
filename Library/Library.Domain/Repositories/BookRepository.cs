@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.Data.Entities;
 using Library.Data.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Domain.Repositories
 {
@@ -17,7 +18,7 @@ namespace Library.Domain.Repositories
         private readonly LibraryContext _libraryContext;
         public List<Book> GetAllBooks()
         {
-            return _libraryContext.Books.ToList();
+            return _libraryContext.Books.Include(x=>x.BookRents).ToList();
         }
         public Book GetBook(int id)
         {

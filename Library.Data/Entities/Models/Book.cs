@@ -21,7 +21,6 @@ namespace Library.Data.Entities.Models
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
         public ICollection<BookRent> BookRents { get; set; }
-        public bool IsRentActive { get; set; }
 
 
     }

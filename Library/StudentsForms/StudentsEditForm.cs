@@ -34,6 +34,7 @@ namespace Library.StudentsForms
             dateOfReturnDateTimePicker.Hide();
             datOfRentDateTimePicker.Hide();
            isReturnedCheckBox.Hide();
+          
         }
 
         public void SetText()
@@ -47,24 +48,58 @@ namespace Library.StudentsForms
 
         public void AddRefreshList()
         {
-            var bookRentOfStudent = BookRentRepository.GetAllBookRents()
-                .FirstOrDefault(x => x.StudentId == SelectedStudent.StudentId);
-            if (bookRentOfStudent == null) return;
-            var getBookRentOfStudent = BookRentRepository.GetBookRent(bookRentOfStudent.BookId, bookRentOfStudent.StudentId);
-            booksComboBox.Items.Add(getBookRentOfStudent);
-           
-            var availableBookRent = BookRentRepository.GetAllBookRents().FirstOrDefault((x =>
-                (x.DateOfReturn != null && x.StudentId != SelectedStudent.StudentId)));
-            if (availableBookRent == null) return;
-            var getAvailableBookRent = BookRentRepository.GetBookRent(availableBookRent.BookId, availableBookRent.StudentId); 
-            booksToRentComboBox.Items.Add(getAvailableBookRent);
-           
+            //var macka =BookRentRepository.GetAllBookRents().FirstOrDefault(x => x.StudentId != SelectedStudent.StudentId && x.DateOfReturn !=null);
+            //if(macka!=null
+            //    )
+               
+            //booksToRentComboBox.Items.Add(macka);
+            //var pas = BookRentRepository.GetAllBookRents()
+            //    .FirstOrDefault(x => x.StudentId == SelectedStudent.StudentId);
+            //if(pas!=null)
+            //booksComboBox.Items.Add(pas);
+            //var bookRentOfStudent = BookRentRepository.GetAllBookRents()
+            //    .FirstOrDefault(x => x.StudentId == SelectedStudent.StudentId);
+            //if (bookRentOfStudent != null)
+            //{
+            //    var getBookRentOfStudent = BookRentRepository.GetBookRent(bookRentOfStudent.BookId, bookRentOfStudent.StudentId);
+            //    booksComboBox.Items.Add(getBookRentOfStudent);
+            //}
+
+
+            //var availableBookRent = BookRentRepository.GetAllBookRents().FirstOrDefault((x =>
+            //    (x.DateOfReturn != null && x.StudentId != SelectedStudent.StudentId)));
+            //if (availableBookRent != null)
+            //{
+            //    var getAvailableBookRent =
+            //        BookRentRepository.GetBookRent(availableBookRent.BookId, availableBookRent.StudentId);
+            //    if (getAvailableBookRent != null)
+            //        booksToRentComboBox.Items.Add(getAvailableBookRent);
+            //}
+            var books = BookRentRepository.GetAllBookRents().Where(x => x.StudentId == SelectedStudent.StudentId)
+                .ToList();
+            books.ForEach(x=>booksComboBox.Items.Add(x));
+            var books2 = BookRentRepository.GetAllBookRents()
+                .Where(x =>x.DateOfReturn!=null&& x.StudentId != SelectedStudent.StudentId).ToList();
+            books2.ForEach(x=>booksToRentComboBox.Items.Add(x));
+            //var bookRentOfStudent = BookRentRepository.GetAllBookRents()
+            //    .FirstOrDefault(x => x.StudentId == SelectedStudent.StudentId);
+            //if (bookRentOfStudent == null) return;
+            //var getBookRentOfStudent = BookRentRepository.GetBookRentBookId(bookRentOfStudent.BookId);
+            //booksComboBox.Items.Add(bookRentOfStudent);
+
+            //var availableBookRent = BookRentRepository.GetAllBookRents().FirstOrDefault((x =>
+            //    (x.DateOfReturn != null && x.StudentId != SelectedStudent.StudentId)));
+            //if (availableBookRent == null) return;
+            //var getAvailableBookRent = BookRentRepository.GetBookRentBookId(availableBookRent.BookId);
+            //booksToRentComboBox.Items.Add(availableBookRent);
+
+
         }
 
         private void RemoveRentButtonClick(object sender, EventArgs e)
         {
-            booksToRentComboBox.Items.Add(booksComboBox.SelectedItem);
-            booksComboBox.Items.Remove(booksComboBox.SelectedItem);
+            booksToRentComboBox.Items.Add(booksComboBox.SelectedItem as BookRent);
+            booksComboBox.Items.Remove(booksComboBox.SelectedItem as BookRent);
             booksComboBox.ResetText();
             
         }
@@ -77,20 +112,21 @@ namespace Library.StudentsForms
             datOfRentDateTimePicker.Hide();
             isReturnedCheckBox.Hide();
             booksToRentComboBox.ResetText();
-            var bookToRent = new BookRent();
-            bookToRent = booksToRentComboBox.SelectedItem as BookRent;
+            var  bookToRent = booksToRentComboBox.SelectedItem as BookRent;
             var editedBookRent = new BookRent();
             editedBookRent.DateOfReturn = dateOfReturnDateTimePicker.Value;
             editedBookRent.DateOfRent = datOfRentDateTimePicker.Value;
             editedBookRent.BookId = bookToRent.BookId;
             
             editedBookRent.StudentId = SelectedStudent.StudentId;
-            var getEditedBookRent = BookRentRepository.GetBookRent(editedBookRent.BookId, editedBookRent.StudentId);
+            var getEditedBookRent = BookRentRepository.GetBookRentBookId(editedBookRent.BookId);
+             
             getEditedBookRent.DateOfReturn = dateOfReturnDateTimePicker.Value;
+            if (isReturnedCheckBox.Checked)
+                getEditedBookRent.DateOfReturn = null;
             getEditedBookRent.DateOfRent = datOfRentDateTimePicker.Value;
             booksToRentComboBox.Items.Remove(booksToRentComboBox.SelectedItem);
-            if (isReturnedCheckBox.Checked)
-            getEditedBookRent.DateOfReturn = null;
+           
             booksComboBox.Items.Add(getEditedBookRent);
         }
 
@@ -104,17 +140,38 @@ namespace Library.StudentsForms
         private void SaveButtonClick(object sender, EventArgs e)
         {
             var studentToEdit = new Student();
+            studentToEdit.BookRents = new List<BookRent>();
             studentToEdit.StudentId = SelectedStudent.StudentId;
             studentToEdit.Class = classTextBox.Text;
             studentToEdit.DateOfBirth = dateOfBirthDateTimePicker.Value;
             studentToEdit.FirstName = firstNameTextBox.Text;
             studentToEdit.LastName = lastNameTextBox.Text;
             studentToEdit.Gender = SelectedStudent.Gender;
+            var list = new List<BookRent>();
+            var list2 = new List<BookRent>();
+
             foreach (var bookRent in booksComboBox.Items)
             {
-                BookRentRepository.EditBookRent(bookRent as BookRent);
+                list.Add(bookRent as BookRent);
+                studentToEdit.BookRents.Add(bookRent as BookRent);
+                //BookRentRepository.EditBookRent(bookRent as BookRent);
             }
 
+            foreach (var bookRent in list)
+            {
+                bookRent.StudentId = SelectedStudent.StudentId;
+            }
+            list.ForEach(x => x.StudentId = SelectedStudent.StudentId);
+            list.ForEach(x => BookRentRepository.EditBookRent(x));
+            foreach (var bookRent in booksToRentComboBox.Items)
+            {
+                list2.Add(bookRent as BookRent);
+                //BookRentRepository.RemoveBookRent(bookRent as BookRent);
+            }
+
+            booksToRentComboBox.Items.Clear();
+            booksComboBox.Items.Clear();
+            studentToEdit.BookRents = list;
             StudentRepository.EditStudent(studentToEdit);
         }
 

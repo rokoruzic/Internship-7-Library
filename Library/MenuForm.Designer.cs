@@ -61,6 +61,7 @@
             this.bookRentsButton.TabIndex = 2;
             this.bookRentsButton.Text = "Book rents";
             this.bookRentsButton.UseVisualStyleBackColor = true;
+            this.bookRentsButton.Click += new System.EventHandler(this.BookRentsButtonClick);
             // 
             // publishersButton
             // 
@@ -81,7 +82,7 @@
             this.studentsButton.UseVisualStyleBackColor = true;
             this.studentsButton.Click += new System.EventHandler(this.StudentsButtonClick);
             // 
-            // Menu
+            // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,7 +92,7 @@
             this.Controls.Add(this.bookRentsButton);
             this.Controls.Add(this.booksButton);
             this.Controls.Add(this.authorButton);
-            this.Name = "Menu";
+            this.Name = "MenuForm";
             this.Text = "Menu";
             this.ResumeLayout(false);
 

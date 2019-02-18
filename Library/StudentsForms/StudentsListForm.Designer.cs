@@ -52,6 +52,7 @@
             this.addButton.TabIndex = 1;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.AddButtonClick);
             // 
             // editButton
             // 
@@ -71,6 +72,7 @@
             this.deleteButton.TabIndex = 3;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButtonClick);
             // 
             // viewButton
             // 
@@ -80,6 +82,7 @@
             this.viewButton.TabIndex = 4;
             this.viewButton.Text = "View";
             this.viewButton.UseVisualStyleBackColor = true;
+            this.viewButton.Click += new System.EventHandler(this.ViewButtonClick);
             // 
             // StudentsListForm
             // 
