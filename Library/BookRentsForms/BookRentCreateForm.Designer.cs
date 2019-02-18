@@ -30,8 +30,8 @@
         {
             this.availableBookRentsComboBox = new System.Windows.Forms.ComboBox();
             this.availableStudentsComboBox = new System.Windows.Forms.ComboBox();
-            this.dateOfRentComboBox = new System.Windows.Forms.DateTimePicker();
-            this.dateOfReturnComboBox = new System.Windows.Forms.DateTimePicker();
+            this.dateOfRentDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dateOfReturnDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.addButton = new System.Windows.Forms.Button();
             this.isReturnedCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -52,19 +52,19 @@
             this.availableStudentsComboBox.Size = new System.Drawing.Size(277, 24);
             this.availableStudentsComboBox.TabIndex = 1;
             // 
-            // dateOfRentComboBox
+            // dateOfRentDateTimePicker
             // 
-            this.dateOfRentComboBox.Location = new System.Drawing.Point(40, 221);
-            this.dateOfRentComboBox.Name = "dateOfRentComboBox";
-            this.dateOfRentComboBox.Size = new System.Drawing.Size(277, 22);
-            this.dateOfRentComboBox.TabIndex = 2;
+            this.dateOfRentDateTimePicker.Location = new System.Drawing.Point(40, 221);
+            this.dateOfRentDateTimePicker.Name = "dateOfRentDateTimePicker";
+            this.dateOfRentDateTimePicker.Size = new System.Drawing.Size(277, 22);
+            this.dateOfRentDateTimePicker.TabIndex = 2;
             // 
-            // dateOfReturnComboBox
+            // dateOfReturnDateTimePicker
             // 
-            this.dateOfReturnComboBox.Location = new System.Drawing.Point(40, 300);
-            this.dateOfReturnComboBox.Name = "dateOfReturnComboBox";
-            this.dateOfReturnComboBox.Size = new System.Drawing.Size(277, 22);
-            this.dateOfReturnComboBox.TabIndex = 3;
+            this.dateOfReturnDateTimePicker.Location = new System.Drawing.Point(40, 300);
+            this.dateOfReturnDateTimePicker.Name = "dateOfReturnDateTimePicker";
+            this.dateOfReturnDateTimePicker.Size = new System.Drawing.Size(277, 22);
+            this.dateOfReturnDateTimePicker.TabIndex = 3;
             // 
             // addButton
             // 
@@ -94,8 +94,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.isReturnedCheckBox);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.dateOfReturnComboBox);
-            this.Controls.Add(this.dateOfRentComboBox);
+            this.Controls.Add(this.dateOfReturnDateTimePicker);
+            this.Controls.Add(this.dateOfRentDateTimePicker);
             this.Controls.Add(this.availableStudentsComboBox);
             this.Controls.Add(this.availableBookRentsComboBox);
             this.Name = "BookRentCreateForm";
@@ -109,8 +109,8 @@
 
         private System.Windows.Forms.ComboBox availableBookRentsComboBox;
         private System.Windows.Forms.ComboBox availableStudentsComboBox;
-        private System.Windows.Forms.DateTimePicker dateOfRentComboBox;
-        private System.Windows.Forms.DateTimePicker dateOfReturnComboBox;
+        private System.Windows.Forms.DateTimePicker dateOfRentDateTimePicker;
+        private System.Windows.Forms.DateTimePicker dateOfReturnDateTimePicker;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.CheckBox isReturnedCheckBox;
     }

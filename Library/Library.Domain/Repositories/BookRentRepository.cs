@@ -41,6 +41,8 @@ namespace Library.Domain.Repositories
                         return true;
                 }
             }
+
+            
             foreach (var bookRent in allBookRents)
             {
                 if ((bookRentToCheck.DateOfRent > bookRent.DateOfReturn && bookRentToCheck.DateOfReturn > bookRent.DateOfReturn )||
@@ -71,11 +73,8 @@ namespace Library.Domain.Repositories
         {
             var editedBookRent = _libraryContext.BookRents.FirstOrDefault(x => x.BookRentId==bookRentToEdit.BookRentId);
             if (editedBookRent == null) return false;
-            editedBookRent.Book = bookRentToEdit.Book;
-            editedBookRent.BookId = bookRentToEdit.BookId;
-
-            editedBookRent.Student = bookRentToEdit.Student;
-            editedBookRent.StudentId = bookRentToEdit.StudentId;
+            editedBookRent.DateOfRent = bookRentToEdit.DateOfRent;
+            editedBookRent.DateOfReturn = bookRentToEdit.DateOfReturn;
 
             _libraryContext.SaveChanges();
             return true;

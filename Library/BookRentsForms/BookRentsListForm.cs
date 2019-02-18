@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
 
 namespace Library.BookRentsForms
@@ -40,6 +41,26 @@ namespace Library.BookRentsForms
             var bookRentCreateForm = new BookRentCreateForm(BookRentRepository,BookRepository,StudentRepository);
             bookRentCreateForm.AddRefreshList();
             bookRentCreateForm.ShowDialog();
+        }
+
+        private void EditBookRentButtonClick(object sender, EventArgs e)
+        {
+            var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
+            if(bookRentActiveListBox.SelectedItem!=null)
+            selectedBookRent=bookRentActiveListBox.SelectedItem as BookRent;
+            var bookRentEditForm = new BookRentEditForm(BookRentRepository,BookRepository,StudentRepository) { SelectedBookRent = selectedBookRent };
+            bookRentEditForm.SetText();
+            bookRentEditForm.Show();
+        }
+
+        private void BooksRentNotActiveListBoxReset(object sender, EventArgs e)
+        {
+            bookRentActiveListBox.SelectedItem = null;
+        }
+
+        private void BookRentActiveListBoxReset(object sender, EventArgs e)
+        {
+            booksRentNotActiveListBox.SelectedItem = null;
         }
     }
 }

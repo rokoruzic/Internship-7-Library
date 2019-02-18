@@ -27,10 +27,10 @@ namespace Library.StudentsForms
         public void AddRefreshList()
         {
             var a = BookRentRepository.GetAllBookRents().Where(x => x.StudentId == SelectedStudent.StudentId).ToList();
-            a.ForEach(x => bookRentsListBox.Items.Add(x));
-            var b = a.FirstOrDefault(x => x.DateOfReturn != null);
-            if (b == null) return;
-            isRentActiveTextBox.Text = "Rent is active";
+            a.ForEach(x=>bookRentsListBox.Items.Add(x));
+            var b = a.Where(x => x.DateOfReturn == null).ToList();
+            if (b.Count>0 ) isRentActiveTextBox.Text = "Rent  active";
+            else isRentActiveTextBox.Text = "Rent not active";
 
             //foreach (var bookRent in a)
             //{

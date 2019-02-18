@@ -24,7 +24,7 @@ namespace Library.BookRentsForms
             BookRentRepository = bookRentRepository;
             BookRepository = bookRepository;
             StudentRepository = studentRepository;
-            dateOfReturnComboBox.Hide();
+            dateOfReturnDateTimePicker.Hide();
         }
 
         public void AddRefreshList()
@@ -69,7 +69,7 @@ namespace Library.BookRentsForms
 
         private void IsReturnedCheckBoxChanged(object sender, EventArgs e)
         {
-            dateOfReturnComboBox.Show();
+            dateOfReturnDateTimePicker.Show();
             isReturnedCheckBox.Hide();
         }
 
@@ -78,14 +78,13 @@ namespace Library.BookRentsForms
             var bookRentToAdd = new BookRent();
             bookRentToAdd.Student=availableStudentsComboBox.SelectedItem as Student;
             bookRentToAdd.Book=availableBookRentsComboBox.SelectedItem as Book;
-            bookRentToAdd.DateOfRent = dateOfRentComboBox.Value;
-            bookRentToAdd.DateOfReturn = dateOfReturnComboBox.Value;
+            bookRentToAdd.DateOfRent = dateOfRentDateTimePicker.Value;
+            bookRentToAdd.DateOfReturn = dateOfReturnDateTimePicker.Value;
             if (!isReturnedCheckBox.Checked) bookRentToAdd.DateOfReturn = null;
             var specificBookRent = BookRentRepository.GetAllBookRents()
                 .Where(x => x.BookId == bookRentToAdd.Book.BookId).ToList();
             var specificBookRent2 = BookRentRepository.GetAllBookRents()
                 .Where(x => x.StudentId == bookRentToAdd.Student.StudentId).ToList();
-            var books2 = BookRentRepository.GetAllBookRents().ToList();
 
             if (specificBookRent.Count==0 || specificBookRent2.Count==0) BookRentRepository.AddBookRent(bookRentToAdd);
             if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2,bookRentToAdd))

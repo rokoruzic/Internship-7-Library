@@ -46,6 +46,7 @@
             this.bookRentActiveListBox.Name = "bookRentActiveListBox";
             this.bookRentActiveListBox.Size = new System.Drawing.Size(260, 308);
             this.bookRentActiveListBox.TabIndex = 0;
+            this.bookRentActiveListBox.Click += new System.EventHandler(this.BookRentActiveListBoxReset);
             // 
             // currentlyRentedBooksLabel
             // 
@@ -73,6 +74,7 @@
             this.booksRentNotActiveListBox.Name = "booksRentNotActiveListBox";
             this.booksRentNotActiveListBox.Size = new System.Drawing.Size(303, 308);
             this.booksRentNotActiveListBox.TabIndex = 3;
+            this.booksRentNotActiveListBox.Click += new System.EventHandler(this.BooksRentNotActiveListBoxReset);
             // 
             // addBookRentButton
             // 
@@ -110,6 +112,7 @@
             this.editBookRentButton.TabIndex = 7;
             this.editBookRentButton.Text = "Edit";
             this.editBookRentButton.UseVisualStyleBackColor = true;
+            this.editBookRentButton.Click += new System.EventHandler(this.EditBookRentButtonClick);
             // 
             // BookRentsListForm
             // 

@@ -10,7 +10,7 @@ namespace Library.Data.Entities.Models
     {
         public override string ToString()
         {
-            return $"{Book.Name} {DateOfRent:d} {DateOfReturn:d}";
+            return $"{Book} {DateOfRent:d} {DateOfReturn:d}  {Student.FirstName} {Student.LastName}";
         }
     }
 }
