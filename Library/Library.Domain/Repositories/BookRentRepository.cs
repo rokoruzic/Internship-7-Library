@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using Library.Data.Entities;
@@ -33,30 +34,48 @@ namespace Library.Domain.Repositories
 
         public bool CheckAvailableDate(List<BookRent> allBookRents, BookRent bookRentToCheck)
         {
-            if (bookRentToCheck.DateOfReturn == null)
-            {
-                foreach (var bookRent in allBookRents)
-                {
-                    if (bookRentToCheck.DateOfRent > bookRent.DateOfReturn)
-                        return true;
-                }
-            }
+            //if (bookRentToCheck.DateOfReturn == null)
+            //{
+            //    foreach (var bookRent in allBookRents)
+            //    {
+            //        if (bookRentToCheck.DateOfRent > bookRent.DateOfReturn)
+            //            return true;
+            //    }
+            //}
 
-            
-            foreach (var bookRent in allBookRents)
-            {
-                if ((bookRentToCheck.DateOfRent > bookRent.DateOfReturn && bookRentToCheck.DateOfReturn > bookRent.DateOfReturn )||
-                    (bookRentToCheck.DateOfRent < bookRent.DateOfRent && bookRentToCheck.DateOfReturn < bookRent.DateOfRent ))
-                    
-                    return true;
-            }
+            var checkerWithNull = allBookRents.Where(x => bookRentToCheck.DateOfRent > x.DateOfReturn).ToList();
+            if (checkerWithNull.Count == allBookRents.Count) return true;
 
+            var checker = allBookRents.Where(x => (bookRentToCheck.DateOfRent > x.DateOfReturn &&
+                                                   bookRentToCheck.DateOfReturn > x.DateOfReturn) ||
+                                                  (bookRentToCheck.DateOfRent < x.DateOfRent &&
+                                                   bookRentToCheck.DateOfReturn < x.DateOfRent)).ToList();
+            if (checker.Count == allBookRents.Count) return true;
             return false;
+            //foreach (var bookRent in allBookRents)
+            //{
+            //    if ((bookRentToCheck.DateOfRent > bookRent.DateOfReturn &&
+            //         bookRentToCheck.DateOfReturn > bookRent.DateOfReturn) ||
+            //        (bookRentToCheck.DateOfRent < bookRent.DateOfRent &&
+            //         bookRentToCheck.DateOfReturn < bookRent.DateOfRent))
+            //        return true;
+            //}
+
+            //return false;
         }
         
         public void AddBookRent(BookRent bookRentToAdd)
         {
+            //var macka = _libraryContext.Books.FirstOrDefault(x => bookRentToAdd.Book.BookId == x.BookId);
+            //bookRentToAdd.Book = _libraryContext.Books.FirstOrDefault(x => bookRentToAdd.Book.BookId == x.BookId);
+            //bookRentToAdd.Student =
+            //    _libraryContext.Students.FirstOrDefault(x => bookRentToAdd.Student.StudentId == x.StudentId);
             _libraryContext.BookRents.Add(bookRentToAdd);
+
+
+            //_libraryContext.Students.Attach(bookRentToAdd.Student);
+            //_libraryContext.BookRents.Attach(bookRentToAdd);
+
             _libraryContext.SaveChanges();
         }
         public BookRent GetBookRent(int bookId,int studentId)

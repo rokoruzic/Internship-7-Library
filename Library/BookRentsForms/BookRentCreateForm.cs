@@ -78,6 +78,8 @@ namespace Library.BookRentsForms
             var bookRentToAdd = new BookRent();
             bookRentToAdd.Student=availableStudentsComboBox.SelectedItem as Student;
             bookRentToAdd.Book=availableBookRentsComboBox.SelectedItem as Book;
+            //bookRentToAdd.BookId = bookRentToAdd.Book.BookId;
+            //bookRentToAdd.StudentId = bookRentToAdd.Student.StudentId;
             bookRentToAdd.DateOfRent = dateOfRentDateTimePicker.Value;
             bookRentToAdd.DateOfReturn = dateOfReturnDateTimePicker.Value;
             if (!isReturnedCheckBox.Checked) bookRentToAdd.DateOfReturn = null;
@@ -86,8 +88,10 @@ namespace Library.BookRentsForms
             var specificBookRent2 = BookRentRepository.GetAllBookRents()
                 .Where(x => x.StudentId == bookRentToAdd.Student.StudentId).ToList();
 
-            if (specificBookRent.Count==0 || specificBookRent2.Count==0) BookRentRepository.AddBookRent(bookRentToAdd);
-            if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2,bookRentToAdd))
+            //if (specificBookRent.Count == 0 && specificBookRent2.Count == 0) BookRentRepository.AddBookRent(bookRentToAdd);
+            //if (specificBookRent.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
+            //if (specificBookRent2.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
+            //if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2,bookRentToAdd))
                 BookRentRepository.AddBookRent(bookRentToAdd);
 
 

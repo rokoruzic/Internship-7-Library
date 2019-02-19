@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.BookRentsForms;
+using Library.BooksForms;
 using Library.Data.Entities;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -20,7 +21,6 @@ namespace Library
         public BookRentRepository BookRentRepository { get; set; }
         public BookRepository  BookRepository { get; set; }
         public AuthorRepository AuthorRepository { get; set; }
-        public AuthorBookRepository AuthorBookRepository { get; set; }
         public PublisherRepository PublisherRepository { get; set; }
         public LibraryContext LibraryContext { get; set; }
         public MenuForm()
@@ -32,7 +32,6 @@ namespace Library
             BookRentRepository = new BookRentRepository(LibraryContext);
             AuthorRepository = new AuthorRepository(LibraryContext);
             PublisherRepository = new PublisherRepository(LibraryContext);
-            AuthorBookRepository= new AuthorBookRepository(LibraryContext);
 
         }
 
@@ -49,6 +48,13 @@ namespace Library
             var bookRentsListForm = new BookRentsListForm(BookRentRepository, StudentRepository,BookRepository);
             bookRentsListForm.AddRefreshList();
             bookRentsListForm.ShowDialog();
+        }
+
+        private void BooksButtonClick(object sender, EventArgs e)
+        {
+            var bookListForm = new BookListForm(BookRentRepository, BookRepository,AuthorRepository,PublisherRepository);
+            bookListForm.AddRefreshList();
+            bookListForm.Show();
         }
     }
 }

@@ -18,19 +18,20 @@ namespace Library.Domain.Repositories
         private readonly LibraryContext _libraryContext;
         public List<Book> GetAllBooks()
         {
-            return _libraryContext.Books.Include(x=>x.BookRents).ToList();
+            return _libraryContext.Books.Include(x=>x.BookRents).Include(x=>x.Author).Include(x=>x.Publisher).ToList();
         }
         public Book GetBook(int id)
         {
            
             return _libraryContext.Books.FirstOrDefault(x => x.BookId == id);
         }
-        public bool Check(BookRentRepository bookRentRepository, Student selectedStudent)
+        public bool AddBook(Book bookToAdd)
         {
-            if (GetBook(bookRentRepository.GetAllBookRents()
-                    .FirstOrDefault(x => (x.DateOfReturn != null && x.StudentId != selectedStudent.StudentId)).BookId)==null 
-                ) return false;
+            if (bookToAdd == null) return false;
+            _libraryContext.Books.Add(bookToAdd);
+            _libraryContext.SaveChanges();
             return true;
         }
+
     }
 }

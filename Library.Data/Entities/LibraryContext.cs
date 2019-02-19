@@ -18,7 +18,6 @@ namespace Library.Data.Entities
         public DbSet<BookRent> BookRents { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<AuthorBook> AuthorsBooks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,16 +27,7 @@ namespace Library.Data.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
              
-            modelBuilder.Entity<AuthorBook>()
-                .HasKey(bc => new { bc.BookId, bc.AuthorId });
-            modelBuilder.Entity<AuthorBook>()
-                .HasOne(bc => bc.Book)
-                .WithMany(b => b.AuthorsBooks)
-                .HasForeignKey(bc => bc.BookId);
-            modelBuilder.Entity<AuthorBook>()
-                .HasOne(bc => bc.Author)
-                .WithMany(c => c.AuthorsBooks)
-                .HasForeignKey(bc => bc.AuthorId);
+           
 
           
             modelBuilder.Entity<BookRent>()
