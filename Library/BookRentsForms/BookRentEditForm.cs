@@ -59,7 +59,7 @@ namespace Library.BookRentsForms
             var specificBookRent2 = BookRentRepository.GetAllBookRents()
                 .Where(x => x.StudentId == bookRentToEdit.Student.StudentId).ToList();
             var spec2 = specificBookRent2.Except(wantedBookRent).ToList();
-            if (spec.Count == 0 || spec2.Count == 0) BookRentRepository.EditBookRent(bookRentToEdit);
+            //if (spec.Count == 0 || spec2.Count == 0) BookRentRepository.EditBookRent(bookRentToEdit);
             if (BookRentRepository.CheckAvailableDate(spec, bookRentToEdit) && BookRentRepository.CheckAvailableDate(spec2, bookRentToEdit))
                 BookRentRepository.EditBookRent(bookRentToEdit);
         }

@@ -32,6 +32,22 @@ namespace Library.Domain.Repositories
             _libraryContext.SaveChanges();
             return true;
         }
+        public bool EditBook(Book bookToEdit)
+        {
+            var editedBook
+                = _libraryContext.Books.FirstOrDefault(x => x.BookId == bookToEdit.BookId);
+            if (bookToEdit == null) return false;
+            editedBook.Name = bookToEdit.Name;
+            editedBook.Publisher = bookToEdit.Publisher;
+            editedBook.Pages = bookToEdit.Pages;
+            editedBook.PublisherId = bookToEdit.PublisherId;
+            editedBook.Author = bookToEdit.Author;
+            editedBook.Genre = bookToEdit.Genre;
+
+            _libraryContext.SaveChanges();
+            return true;
+
+        }
 
     }
 }

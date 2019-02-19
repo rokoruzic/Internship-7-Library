@@ -46,6 +46,7 @@
             this.rentedBooksListBox.Name = "rentedBooksListBox";
             this.rentedBooksListBox.Size = new System.Drawing.Size(303, 308);
             this.rentedBooksListBox.TabIndex = 0;
+            this.rentedBooksListBox.Click += new System.EventHandler(this.RentedBooksListBoxClick);
             // 
             // notRentedListBox
             // 
@@ -55,6 +56,7 @@
             this.notRentedListBox.Name = "notRentedListBox";
             this.notRentedListBox.Size = new System.Drawing.Size(292, 308);
             this.notRentedListBox.TabIndex = 1;
+            this.notRentedListBox.Click += new System.EventHandler(this.NotRentedListBoxClick);
             // 
             // rentedBooksLabel
             // 
@@ -110,6 +112,7 @@
             this.editBookButton.TabIndex = 7;
             this.editBookButton.Text = "Edit";
             this.editBookButton.UseVisualStyleBackColor = true;
+            this.editBookButton.Click += new System.EventHandler(this.EditBookButtonClick);
             // 
             // BookListForm
             // 

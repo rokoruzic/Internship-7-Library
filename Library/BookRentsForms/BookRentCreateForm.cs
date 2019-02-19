@@ -91,7 +91,7 @@ namespace Library.BookRentsForms
             //if (specificBookRent.Count == 0 && specificBookRent2.Count == 0) BookRentRepository.AddBookRent(bookRentToAdd);
             //if (specificBookRent.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
             //if (specificBookRent2.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
-            //if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2,bookRentToAdd))
+            if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd))
                 BookRentRepository.AddBookRent(bookRentToAdd);
 
 

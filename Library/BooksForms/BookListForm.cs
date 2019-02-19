@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
 
 namespace Library.BooksForms
@@ -45,10 +46,33 @@ namespace Library.BooksForms
 
         private void AddBookButtonClick(object sender, EventArgs e)
         {
+            if (AuthorRepository.GetAllAuthors().Count == 0) return;
             var bookCreateForm = new BookCreateForm(BookRepository,AuthorRepository,PublisherRepository);
             bookCreateForm.AddRefreshList();
             bookCreateForm.Show();
 
+        }
+
+        private void EditBookButtonClick(object sender, EventArgs e)
+        {
+            var selectedBook = notRentedListBox.SelectedItem as Book;
+            if (rentedBooksListBox.SelectedItem != null)
+                selectedBook = rentedBooksListBox.SelectedItem as Book;
+            if (selectedBook == null) return;
+            var bookEditForm = new BookEditForm(BookRepository, AuthorRepository, PublisherRepository){SelectedBook = selectedBook};
+            bookEditForm.SetText();
+            bookEditForm.AddRefreshList();
+            bookEditForm.Show();
+        }
+
+        private void NotRentedListBoxClick(object sender, EventArgs e)
+        {
+            rentedBooksListBox.SelectedItem = null;
+        }
+
+        private void RentedBooksListBoxClick(object sender, EventArgs e)
+        {
+            notRentedListBox.SelectedItem = null;
         }
     }
 }
