@@ -48,6 +48,16 @@ namespace Library.Domain.Repositories
             return true;
 
         }
+     
+
+        public bool RemoveBook(int bookId)
+        {
+            var bookToRemove = _libraryContext.Books.FirstOrDefault(x => x.BookId == bookId);
+            if (bookToRemove == null) return false;
+            _libraryContext.Books.Remove(bookToRemove);
+            _libraryContext.SaveChanges();
+            return true;
+        }
 
     }
 }

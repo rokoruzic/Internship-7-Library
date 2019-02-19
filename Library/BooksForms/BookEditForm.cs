@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library.BookRentsForms;
 using Library.Data.Entities.Enums;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -55,6 +56,8 @@ namespace Library.BooksForms
             bookToEdit.Pages = (int)bookPagesNumUpDown.Value;
             bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
             BookRepository.EditBook(bookToEdit);
+            Close();
+            
         }
 
         private void SaveAllCopiesButtonClick(object sender, EventArgs e)
@@ -73,6 +76,7 @@ namespace Library.BooksForms
                 bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
             }
             bookCopies.ForEach(x=>BookRepository.EditBook(x));
+            Close();
         }
     }
 }

@@ -29,6 +29,8 @@ namespace Library.BooksForms
 
         public void AddRefreshList()
         {
+            rentedBooksListBox.Items.Clear();
+            notRentedListBox.Items.Clear();
             var rentedBooks = BookRentRepository.GetAllBookRents().Where(x => x.DateOfReturn == null)
                 .Select(x => x.Book).ToList();
             var notRentedBooks = BookRentRepository.GetAllBookRents().Where(x => x.DateOfReturn != null)
@@ -50,7 +52,7 @@ namespace Library.BooksForms
             var bookCreateForm = new BookCreateForm(BookRepository,AuthorRepository,PublisherRepository);
             bookCreateForm.AddRefreshList();
             bookCreateForm.Show();
-
+            AddRefreshList();
         }
 
         private void EditBookButtonClick(object sender, EventArgs e)
@@ -63,6 +65,7 @@ namespace Library.BooksForms
             bookEditForm.SetText();
             bookEditForm.AddRefreshList();
             bookEditForm.Show();
+            AddRefreshList();
         }
 
         private void NotRentedListBoxClick(object sender, EventArgs e)
@@ -73,6 +76,30 @@ namespace Library.BooksForms
         private void RentedBooksListBoxClick(object sender, EventArgs e)
         {
             notRentedListBox.SelectedItem = null;
+        }
+
+        private void DeleteBookButtonClick(object sender, EventArgs e)
+        {
+            var selectedBook = notRentedListBox.SelectedItem as Book;
+            if (rentedBooksListBox.SelectedItem != null)
+                selectedBook = rentedBooksListBox.SelectedItem as Book;
+            if (selectedBook == null) return;
+            BookRepository.RemoveBook(selectedBook.BookId);
+            AddRefreshList();
+
+        }
+
+        private void ViewBookButtonClick(object sender, EventArgs e)
+        {
+            var selectedBook = notRentedListBox.SelectedItem as Book;
+            if (rentedBooksListBox.SelectedItem != null)
+                selectedBook = rentedBooksListBox.SelectedItem as Book;
+            if (selectedBook == null) return;
+            var bookDetailsForm = new BookDetailsForm(BookRentRepository,BookRepository){SelectedBook=selectedBook};
+            bookDetailsForm.SetText();
+            bookDetailsForm.AddRefreshList();
+            bookDetailsForm.Show();
+            
         }
     }
 }

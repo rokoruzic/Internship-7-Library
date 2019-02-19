@@ -94,6 +94,7 @@
             this.viewBookButton.TabIndex = 5;
             this.viewBookButton.Text = "View";
             this.viewBookButton.UseVisualStyleBackColor = true;
+            this.viewBookButton.Click += new System.EventHandler(this.ViewBookButtonClick);
             // 
             // deleteBookButton
             // 
@@ -103,6 +104,7 @@
             this.deleteBookButton.TabIndex = 6;
             this.deleteBookButton.Text = "Delete";
             this.deleteBookButton.UseVisualStyleBackColor = true;
+            this.deleteBookButton.Click += new System.EventHandler(this.DeleteBookButtonClick);
             // 
             // editBookButton
             // 
