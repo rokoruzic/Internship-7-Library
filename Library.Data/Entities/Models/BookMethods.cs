@@ -17,5 +17,13 @@ namespace Library.Data.Entities.Models
         {
             return $"{Name}({BookId}) Author: {Author} Publisher: {Publisher} {Pages} pages";
         }
+        public string PrintWithoutPublisher()
+        {
+            return $"{Name}({BookId}) Author: {Author} {Pages} pages";
+        }
+        public string PrintWithoutAuthor()
+        {
+            return $"{Name}({BookId}) Publisher {Publisher} {Pages} pages";
+        }
     }
 }

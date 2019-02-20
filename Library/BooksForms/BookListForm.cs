@@ -25,6 +25,8 @@ namespace Library.BooksForms
             BookRepository = bookRepository;
             AuthorRepository = authorRepository;
             PublisherRepository = publisherRepository;
+            AddRefreshList();
+
         }
 
         public void AddRefreshList()
@@ -51,7 +53,7 @@ namespace Library.BooksForms
             if (AuthorRepository.GetAllAuthors().Count == 0) return;
             var bookCreateForm = new BookCreateForm(BookRepository,AuthorRepository,PublisherRepository);
             bookCreateForm.AddRefreshList();
-            bookCreateForm.Show();
+            bookCreateForm.ShowDialog();
             AddRefreshList();
         }
 

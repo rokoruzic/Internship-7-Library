@@ -46,6 +46,7 @@ namespace Library.BooksForms
             bookToAdd.Pages = (int) bookPagesNumUpDown.Value;
             bookToAdd.PublisherId = bookToAdd.Publisher.PublisherId;
             BookRepository.AddBook(bookToAdd);
+            Close();
         }
     }
 }

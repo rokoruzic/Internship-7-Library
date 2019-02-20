@@ -43,6 +43,7 @@
             this.authorButton.TabIndex = 0;
             this.authorButton.Text = "Authors";
             this.authorButton.UseVisualStyleBackColor = true;
+            this.authorButton.Click += new System.EventHandler(this.AuthorsButtonClick);
             // 
             // booksButton
             // 
@@ -72,6 +73,7 @@
             this.publishersButton.TabIndex = 3;
             this.publishersButton.Text = "Publishers";
             this.publishersButton.UseVisualStyleBackColor = true;
+            this.publishersButton.Click += new System.EventHandler(this.PublishersButtonClick);
             // 
             // studentsButton
             // 

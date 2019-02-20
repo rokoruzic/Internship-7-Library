@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library.AuthorsForms;
 using Library.BookRentsForms;
 using Library.BooksForms;
 using Library.Data.Entities;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
+using Library.PublishersForms;
 
 namespace Library
 {
@@ -54,7 +56,21 @@ namespace Library
         {
             var bookListForm = new BookListForm(BookRentRepository, BookRepository,AuthorRepository,PublisherRepository);
             bookListForm.AddRefreshList();
-            bookListForm.Show();
+            bookListForm.ShowDialog();
+        }
+
+        private void PublishersButtonClick(object sender, EventArgs e)
+        {
+            var publisherListForm = new PublisherListForm(PublisherRepository, BookRepository);
+            publisherListForm.AddRefreshList();
+            publisherListForm.ShowDialog();
+        }
+
+        private void AuthorsButtonClick(object sender, EventArgs e)
+        {
+            var authorsListForm = new AuthorListForm(AuthorRepository, BookRepository);
+                authorsListForm.AddRefreshList();
+                authorsListForm.ShowDialog();
         }
     }
 }

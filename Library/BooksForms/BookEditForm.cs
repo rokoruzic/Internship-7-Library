@@ -40,9 +40,9 @@ namespace Library.BooksForms
         public void SetText()
         {
             bookNameTextBox.Text = SelectedBook.Name;
-            publishersComboBox.SelectedItem = SelectedBook.Publisher.Name;
-            authorsComboBox.SelectedItem = SelectedBook.Author.ToString();
-            genresComboBox.SelectedItem = SelectedBook.Genre;
+            publishersComboBox.Text = SelectedBook.Publisher.Name;
+            authorsComboBox.Text = SelectedBook.Author.ToString();
+            genresComboBox.Text = SelectedBook.Genre.ToString();
 
         }
         private void SaveButtonClick(object sender, EventArgs e)
