@@ -28,42 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.studentNameTextBox = new System.Windows.Forms.TextBox();
             this.bookRentsListBox = new System.Windows.Forms.ListBox();
-            this.isRentActiveTextBox = new System.Windows.Forms.TextBox();
+            this.studentDetailsLabel = new System.Windows.Forms.Label();
+            this.isRentActiveLabel = new System.Windows.Forms.Label();
+            this.studentDetailsExitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // studentNameTextBox
-            // 
-            this.studentNameTextBox.Location = new System.Drawing.Point(38, 54);
-            this.studentNameTextBox.Name = "studentNameTextBox";
-            this.studentNameTextBox.Size = new System.Drawing.Size(256, 22);
-            this.studentNameTextBox.TabIndex = 0;
             // 
             // bookRentsListBox
             // 
             this.bookRentsListBox.FormattingEnabled = true;
             this.bookRentsListBox.ItemHeight = 16;
-            this.bookRentsListBox.Location = new System.Drawing.Point(448, 54);
+            this.bookRentsListBox.Location = new System.Drawing.Point(38, 138);
             this.bookRentsListBox.Name = "bookRentsListBox";
-            this.bookRentsListBox.Size = new System.Drawing.Size(246, 260);
+            this.bookRentsListBox.Size = new System.Drawing.Size(631, 260);
             this.bookRentsListBox.TabIndex = 1;
             // 
-            // isRentActiveTextBox
+            // studentDetailsLabel
             // 
-            this.isRentActiveTextBox.Location = new System.Drawing.Point(38, 108);
-            this.isRentActiveTextBox.Name = "isRentActiveTextBox";
-            this.isRentActiveTextBox.Size = new System.Drawing.Size(256, 22);
-            this.isRentActiveTextBox.TabIndex = 2;
+            this.studentDetailsLabel.AutoSize = true;
+            this.studentDetailsLabel.Location = new System.Drawing.Point(38, 32);
+            this.studentDetailsLabel.Name = "studentDetailsLabel";
+            this.studentDetailsLabel.Size = new System.Drawing.Size(46, 17);
+            this.studentDetailsLabel.TabIndex = 3;
+            this.studentDetailsLabel.Text = "label1";
+            // 
+            // isRentActiveLabel
+            // 
+            this.isRentActiveLabel.AutoSize = true;
+            this.isRentActiveLabel.Location = new System.Drawing.Point(35, 73);
+            this.isRentActiveLabel.Name = "isRentActiveLabel";
+            this.isRentActiveLabel.Size = new System.Drawing.Size(46, 17);
+            this.isRentActiveLabel.TabIndex = 4;
+            this.isRentActiveLabel.Text = "label1";
+            // 
+            // studentDetailsExitButton
+            // 
+            this.studentDetailsExitButton.Location = new System.Drawing.Point(702, 271);
+            this.studentDetailsExitButton.Name = "studentDetailsExitButton";
+            this.studentDetailsExitButton.Size = new System.Drawing.Size(75, 23);
+            this.studentDetailsExitButton.TabIndex = 5;
+            this.studentDetailsExitButton.Text = "Exit";
+            this.studentDetailsExitButton.UseVisualStyleBackColor = true;
+            this.studentDetailsExitButton.Click += new System.EventHandler(this.StudentDetailsExitButtonClick);
             // 
             // StudentsDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.isRentActiveTextBox);
+            this.Controls.Add(this.studentDetailsExitButton);
+            this.Controls.Add(this.isRentActiveLabel);
+            this.Controls.Add(this.studentDetailsLabel);
             this.Controls.Add(this.bookRentsListBox);
-            this.Controls.Add(this.studentNameTextBox);
             this.Name = "StudentsDetailsForm";
             this.Text = "StudentsDetailsForm";
             this.ResumeLayout(false);
@@ -72,9 +88,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox studentNameTextBox;
         private System.Windows.Forms.ListBox bookRentsListBox;
-        private System.Windows.Forms.TextBox isRentActiveTextBox;
+        private System.Windows.Forms.Label studentDetailsLabel;
+        private System.Windows.Forms.Label isRentActiveLabel;
+        private System.Windows.Forms.Button studentDetailsExitButton;
     }
 }

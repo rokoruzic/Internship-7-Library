@@ -79,6 +79,7 @@
             this.closeButton.TabIndex = 4;
             this.closeButton.Text = "Exit";
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.BookRentDetailsExitButtonClick);
             // 
             // BookRentDetailsForm
             // 

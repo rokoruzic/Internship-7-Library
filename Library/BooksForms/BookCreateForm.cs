@@ -38,15 +38,27 @@ namespace Library.BooksForms
 
         private void AddBookButtonClick(object sender, EventArgs e)
         {
-            var bookToAdd = new Book();
-            bookToAdd.Author=authorsComboBox.SelectedItem as Author;
-            bookToAdd.Publisher=publishersComboBox.SelectedItem as Publisher;
-            bookToAdd.Genre = (BookGenre) genresComboBox.SelectedItem;
-            bookToAdd.Name = bookNameTextBox.Text;
-            bookToAdd.Pages = (int) bookPagesNumUpDown.Value;
-            bookToAdd.PublisherId = bookToAdd.Publisher.PublisherId;
-            BookRepository.AddBook(bookToAdd);
-            Close();
+            if (string.IsNullOrEmpty(bookNameTextBox.Text) || publishersComboBox.SelectedItem == null ||
+                authorsComboBox.SelectedItem == null || genresComboBox.SelectedItem == null)
+            {
+                var errorForm = new ErrorForm("you need to fill all boxes.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookToAdd = new Book
+                {
+                    Author = authorsComboBox.SelectedItem as Author,
+                    Publisher = publishersComboBox.SelectedItem as Publisher,
+                    Genre = (BookGenre) genresComboBox.SelectedItem,
+                    Name = bookNameTextBox.Text,
+                    Pages = (int) bookPagesNumUpDown.Value
+
+                };
+                bookToAdd.PublisherId = bookToAdd.Publisher.PublisherId;
+                BookRepository.AddBook(bookToAdd);
+                Close();
+            }
         }
     }
 }

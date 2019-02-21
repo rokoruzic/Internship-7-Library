@@ -32,6 +32,7 @@
             this.rentDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.saveButton = new System.Windows.Forms.Button();
             this.isReturnedCheckBox = new System.Windows.Forms.CheckBox();
+            this.dateOfRentLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // returnDateDateTimePicker
@@ -69,11 +70,21 @@
             this.isReturnedCheckBox.UseVisualStyleBackColor = true;
             this.isReturnedCheckBox.CheckedChanged += new System.EventHandler(this.IsReturnedCheckBoxChanged);
             // 
+            // dateOfRentLabel
+            // 
+            this.dateOfRentLabel.AutoSize = true;
+            this.dateOfRentLabel.Location = new System.Drawing.Point(41, 92);
+            this.dateOfRentLabel.Name = "dateOfRentLabel";
+            this.dateOfRentLabel.Size = new System.Drawing.Size(129, 17);
+            this.dateOfRentLabel.TabIndex = 9;
+            this.dateOfRentLabel.Text = "select Date of Rent";
+            // 
             // BookRentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dateOfRentLabel);
             this.Controls.Add(this.isReturnedCheckBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.rentDateDateTimePicker);
@@ -91,5 +102,6 @@
         private System.Windows.Forms.DateTimePicker rentDateDateTimePicker;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.CheckBox isReturnedCheckBox;
+        private System.Windows.Forms.Label dateOfRentLabel;
     }
 }

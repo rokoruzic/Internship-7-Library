@@ -34,6 +34,9 @@
             this.dateOfReturnDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.addButton = new System.Windows.Forms.Button();
             this.isReturnedCheckBox = new System.Windows.Forms.CheckBox();
+            this.bookLabel = new System.Windows.Forms.Label();
+            this.studentLabel = new System.Windows.Forms.Label();
+            this.dateOfRentLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // availableBookRentsComboBox
@@ -87,11 +90,41 @@
             this.isReturnedCheckBox.UseVisualStyleBackColor = true;
             this.isReturnedCheckBox.CheckedChanged += new System.EventHandler(this.IsReturnedCheckBoxChanged);
             // 
+            // bookLabel
+            // 
+            this.bookLabel.AutoSize = true;
+            this.bookLabel.Location = new System.Drawing.Point(40, 41);
+            this.bookLabel.Name = "bookLabel";
+            this.bookLabel.Size = new System.Drawing.Size(80, 17);
+            this.bookLabel.TabIndex = 6;
+            this.bookLabel.Text = "select book";
+            // 
+            // studentLabel
+            // 
+            this.studentLabel.AutoSize = true;
+            this.studentLabel.Location = new System.Drawing.Point(40, 109);
+            this.studentLabel.Name = "studentLabel";
+            this.studentLabel.Size = new System.Drawing.Size(96, 17);
+            this.studentLabel.TabIndex = 7;
+            this.studentLabel.Text = "select student";
+            // 
+            // dateOfRentLabel
+            // 
+            this.dateOfRentLabel.AutoSize = true;
+            this.dateOfRentLabel.Location = new System.Drawing.Point(40, 184);
+            this.dateOfRentLabel.Name = "dateOfRentLabel";
+            this.dateOfRentLabel.Size = new System.Drawing.Size(129, 17);
+            this.dateOfRentLabel.TabIndex = 8;
+            this.dateOfRentLabel.Text = "select Date of Rent";
+            // 
             // BookRentCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dateOfRentLabel);
+            this.Controls.Add(this.studentLabel);
+            this.Controls.Add(this.bookLabel);
             this.Controls.Add(this.isReturnedCheckBox);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.dateOfReturnDateTimePicker);
@@ -113,5 +146,8 @@
         private System.Windows.Forms.DateTimePicker dateOfReturnDateTimePicker;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.CheckBox isReturnedCheckBox;
+        private System.Windows.Forms.Label bookLabel;
+        private System.Windows.Forms.Label studentLabel;
+        private System.Windows.Forms.Label dateOfRentLabel;
     }
 }

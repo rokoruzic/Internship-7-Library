@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Library.Data.Entities.Models
+﻿namespace Library.Data.Entities.Models
 {
     public partial class Publisher
     {
+        private string _name;
         public override string ToString()
         {
             return $"{Name} ";

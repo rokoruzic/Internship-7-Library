@@ -31,6 +31,8 @@
             this.authorFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.authorLastNameTextBox = new System.Windows.Forms.TextBox();
             this.addAuthorButton = new System.Windows.Forms.Button();
+            this.firstNameLabel = new System.Windows.Forms.Label();
+            this.lastNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // authorFirstNameTextBox
@@ -57,11 +59,31 @@
             this.addAuthorButton.UseVisualStyleBackColor = true;
             this.addAuthorButton.Click += new System.EventHandler(this.AddAuthorButtonClick);
             // 
+            // firstNameLabel
+            // 
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Location = new System.Drawing.Point(65, 30);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(108, 17);
+            this.firstNameLabel.TabIndex = 3;
+            this.firstNameLabel.Text = "Enter first name";
+            // 
+            // lastNameLabel
+            // 
+            this.lastNameLabel.AutoSize = true;
+            this.lastNameLabel.Location = new System.Drawing.Point(65, 104);
+            this.lastNameLabel.Name = "lastNameLabel";
+            this.lastNameLabel.Size = new System.Drawing.Size(111, 17);
+            this.lastNameLabel.TabIndex = 4;
+            this.lastNameLabel.Text = "Enter last name:";
+            // 
             // AuthorCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lastNameLabel);
+            this.Controls.Add(this.firstNameLabel);
             this.Controls.Add(this.addAuthorButton);
             this.Controls.Add(this.authorLastNameTextBox);
             this.Controls.Add(this.authorFirstNameTextBox);
@@ -77,5 +99,7 @@
         private System.Windows.Forms.TextBox authorFirstNameTextBox;
         private System.Windows.Forms.TextBox authorLastNameTextBox;
         private System.Windows.Forms.Button addAuthorButton;
+        private System.Windows.Forms.Label firstNameLabel;
+        private System.Windows.Forms.Label lastNameLabel;
     }
 }

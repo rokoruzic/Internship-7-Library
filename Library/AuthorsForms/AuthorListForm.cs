@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -21,7 +14,6 @@ namespace Library.AuthorsForms
             InitializeComponent();
             AuthorRepository = authorRepository;
             BookRepository = bookRepository;
-            AddRefreshList();
         }
 
         public void AddRefreshList()
@@ -39,30 +31,48 @@ namespace Library.AuthorsForms
 
         private void AuthorEditButtonClick(object sender, EventArgs e)
         {
-            var selectedAuthor = authorListBox.SelectedItem as Author;
-            if (selectedAuthor == null) return;
-            var authorEditForm = new AuthorEditForm(AuthorRepository){SelectedAuthor = selectedAuthor};
-            authorEditForm.SetText();
-            authorEditForm.ShowDialog();
-            AddRefreshList();
-
+            if (!(authorListBox.SelectedItem is Author selectedAuthor))
+            {
+                var errorForm = new ErrorForm("You need to select author.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var authorEditForm = new AuthorEditForm(AuthorRepository) {SelectedAuthor = selectedAuthor};
+                authorEditForm.SetText();
+                authorEditForm.ShowDialog();
+                AddRefreshList();
+            }
         }
 
         private void AuthorDeleteButtonClick(object sender, EventArgs e)
         {
-            var selectedAuthor = authorListBox.SelectedItem as Author;
-            if (selectedAuthor == null) return;
-            AuthorRepository.RemoveAuthor(selectedAuthor.AuthorId);
-            AddRefreshList();
+            if (!(authorListBox.SelectedItem is Author selectedAuthor))
+            {
+                var errorForm = new ErrorForm("You need to select author.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                AuthorRepository.RemoveAuthor(selectedAuthor.AuthorId);
+                AddRefreshList();
+            }
         }
 
         private void AuthorViewDetailsClick(object sender, EventArgs e)
         {
-            var selectedAuthor = authorListBox.SelectedItem as Author;
-            if (selectedAuthor == null) return;
-            var authorDetailsForm = new AuthorDetailsForm(AuthorRepository,BookRepository){SelectedAuthor = selectedAuthor};
-            authorDetailsForm.AddRefreshList();
-            authorDetailsForm.ShowDialog();
+            if (!(authorListBox.SelectedItem is Author selectedAuthor))
+            {
+                var errorForm = new ErrorForm("You need to select author.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var authorDetailsForm = new AuthorDetailsForm(AuthorRepository, BookRepository)
+                    {SelectedAuthor = selectedAuthor};
+                authorDetailsForm.AddRefreshList();
+                authorDetailsForm.ShowDialog();
+            }
         }
     }
 }

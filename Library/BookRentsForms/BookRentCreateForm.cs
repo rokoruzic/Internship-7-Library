@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -25,29 +19,21 @@ namespace Library.BookRentsForms
             BookRepository = bookRepository;
             StudentRepository = studentRepository;
             dateOfReturnDateTimePicker.Hide();
+            dateOfReturnDateTimePicker.MaxDate=DateTime.Now;
+            dateOfReturnDateTimePicker.MinDate = DateTime.Now.AddYears(-8);
         }
 
         public void AddRefreshList()
         {
             var allBooks = BookRepository.GetAllBooks();
-            var studentsNotToadd = new List<Student>();
+            var studentsNotToAdd = new List<Student>();
             var booksNotToAdd = new List<Book>();
             foreach (var student in StudentRepository.GetAllStudents())
             {
                 foreach (var allBookRent in BookRentRepository.GetAllBookRents())
                 {
                     if
-                       (!allBookRent.DateOfReturn.HasValue && student.StudentId==allBookRent.StudentId) studentsNotToadd.Add(student);
-                    
-                }
-            }
-
-            var listOfStudents = new List<Student>();
-            foreach (var student in StudentRepository.GetAllStudents())
-            {
-                foreach (var bookRent in student.BookRents)
-                {
-                    if (student.StudentId!=bookRent.StudentId) listOfStudents.Add(student);
+                       (!allBookRent.DateOfReturn.HasValue && student.StudentId==allBookRent.StudentId) studentsNotToAdd.Add(student);
                 }
             }
 
@@ -59,11 +45,10 @@ namespace Library.BookRentsForms
                 }
             }
 
-            var nebuloza = StudentRepository.GetAllStudents().Except(studentsNotToadd).ToList();
-            var nebuloza2 = BookRepository.GetAllBooks().Except(booksNotToAdd).ToList();
-           nebuloza2.ForEach(x=>availableBookRentsComboBox.Items.Add(x));
-          nebuloza.ForEach(x=>availableStudentsComboBox.Items.Add(x));
-           
+            var availableStudents = StudentRepository.GetAllStudents().Except(studentsNotToAdd).ToList();
+            var availableBooks = BookRepository.GetAllBooks().Except(booksNotToAdd).ToList();
+           availableBooks.ForEach(x=>availableBookRentsComboBox.Items.Add(x));
+          availableStudents.ForEach(x=>availableStudentsComboBox.Items.Add(x));
 
         }
 
@@ -75,26 +60,46 @@ namespace Library.BookRentsForms
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var bookRentToAdd = new BookRent();
-            bookRentToAdd.Student=availableStudentsComboBox.SelectedItem as Student;
-            bookRentToAdd.Book=availableBookRentsComboBox.SelectedItem as Book;
-            //bookRentToAdd.BookId = bookRentToAdd.Book.BookId;
-            //bookRentToAdd.StudentId = bookRentToAdd.Student.StudentId;
-            bookRentToAdd.DateOfRent = dateOfRentDateTimePicker.Value;
-            bookRentToAdd.DateOfReturn = dateOfReturnDateTimePicker.Value;
-            if (!isReturnedCheckBox.Checked) bookRentToAdd.DateOfReturn = null;
-            var specificBookRent = BookRentRepository.GetAllBookRents()
-                .Where(x => x.BookId == bookRentToAdd.Book.BookId).ToList();
-            var specificBookRent2 = BookRentRepository.GetAllBookRents()
-                .Where(x => x.StudentId == bookRentToAdd.Student.StudentId).ToList();
+            if (availableBookRentsComboBox.SelectedItem == null || availableStudentsComboBox.SelectedItem == null)
+            {
+                var errorForm = new ErrorForm("You need to select student and book");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                if (dateOfReturnDateTimePicker.Value < dateOfRentDateTimePicker.Value && isReturnedCheckBox.Checked)
+                {
+                    var errorForm = new ErrorForm("Date of return cant be before date of rent");
+                    errorForm.ShowDialog();
+                }
+                else
+                {
 
-            //if (specificBookRent.Count == 0 && specificBookRent2.Count == 0) BookRentRepository.AddBookRent(bookRentToAdd);
-            //if (specificBookRent.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
-            //if (specificBookRent2.Count == 0 && BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd)) BookRentRepository.AddBookRent(bookRentToAdd);
-            if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) && BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd))
-                BookRentRepository.AddBookRent(bookRentToAdd);
-
-
+                    var bookRentToAdd = new BookRent
+                    {
+                        Student = availableStudentsComboBox.SelectedItem as Student,
+                        Book = availableBookRentsComboBox.SelectedItem as Book,
+                        DateOfRent = dateOfRentDateTimePicker.Value,
+                        DateOfReturn = dateOfReturnDateTimePicker.Value
+                    };
+                    if (!isReturnedCheckBox.Checked) bookRentToAdd.DateOfReturn = null;
+                    var specificBookRent = BookRentRepository.GetAllBookRents()
+                        .Where(x => x.BookId == bookRentToAdd.Book.BookId).ToList();
+                    var specificBookRent2 = BookRentRepository.GetAllBookRents()
+                        .Where(x => x.StudentId == bookRentToAdd.Student.StudentId).ToList();
+                    if (BookRentRepository.CheckAvailableDate(specificBookRent, bookRentToAdd) &&
+                        BookRentRepository.CheckAvailableDate(specificBookRent2, bookRentToAdd))
+                    {
+                        BookRentRepository.AddBookRent(bookRentToAdd);
+                        Close();
+                    }
+                    else
+                    {
+                        var errorForm = new ErrorForm("That date is already taken");
+                        errorForm.ShowDialog();
+                    }
+                }
+            }
 
         }
     }

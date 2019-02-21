@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -27,20 +22,31 @@ namespace Library.BookRentsForms
 
         public void AddRefreshList()
         {
+            bookRentActiveListBox.Items.Clear();
+            booksRentNotActiveListBox.Items.Clear();
             var rentedBookRents = BookRentRepository.GetAllBookRents().Where(x => x.DateOfReturn==null).ToList();
             rentedBookRents.ForEach(x => bookRentActiveListBox.Items.Add(x));
             var notRentedBookRents = BookRentRepository.GetAllBookRents().Where(x => x.DateOfReturn != null).ToList();
             notRentedBookRents.ForEach(x=>booksRentNotActiveListBox.Items.Add(x));
-            currentlyRentedBooksLabel.Text = $"Current rents : {rentedBookRents.Count}";
-            booksToRentLabel.Text = $"Rents from past : {notRentedBookRents.Count}";
+            currentlyRentedBooksLabel.Text = $@"Current rents : {rentedBookRents.Count}";
+            booksToRentLabel.Text = $@"Rents from past : {notRentedBookRents.Count}";
             
         }
 
         private void AddBookRentButtonClick(object sender, EventArgs e)
         {
-            var bookRentCreateForm = new BookRentCreateForm(BookRentRepository,BookRepository,StudentRepository);
-            bookRentCreateForm.AddRefreshList();
-            bookRentCreateForm.ShowDialog();
+            if (StudentRepository.GetAllStudents().Count == 0 || BookRepository.GetAllBooks().Count == 0)
+            {
+                var errorForm = new ErrorForm("You cant add book rent as there is no book or student");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookRentCreateForm = new BookRentCreateForm(BookRentRepository, BookRepository, StudentRepository);
+                bookRentCreateForm.AddRefreshList();
+                bookRentCreateForm.ShowDialog();
+                AddRefreshList();
+            }
         }
 
         private void EditBookRentButtonClick(object sender, EventArgs e)
@@ -48,9 +54,19 @@ namespace Library.BookRentsForms
             var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
             if(bookRentActiveListBox.SelectedItem!=null)
             selectedBookRent=bookRentActiveListBox.SelectedItem as BookRent;
-            var bookRentEditForm = new BookRentEditForm(BookRentRepository,BookRepository,StudentRepository) { SelectedBookRent = selectedBookRent };
-            bookRentEditForm.SetText();
-            bookRentEditForm.Show();
+            if (selectedBookRent == null)
+            {
+                var errorForm = new ErrorForm("You need to select bookrent.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookRentEditForm = new BookRentEditForm(BookRentRepository, BookRepository, StudentRepository)
+                    {SelectedBookRent = selectedBookRent};
+                bookRentEditForm.SetText();
+                bookRentEditForm.ShowDialog();
+                AddRefreshList();
+            }
         }
 
         private void BooksRentNotActiveListBoxReset(object sender, EventArgs e)
@@ -68,8 +84,16 @@ namespace Library.BookRentsForms
             var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
             if (bookRentActiveListBox.SelectedItem != null)
                 selectedBookRent = bookRentActiveListBox.SelectedItem as BookRent;
-            if (selectedBookRent == null) return;
-            BookRentRepository.RemoveBookRent(selectedBookRent.BookRentId);
+            if (selectedBookRent == null)
+            {
+                var errorForm = new ErrorForm("You need to select bookrent.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                BookRentRepository.RemoveBookRent(selectedBookRent.BookRentId);
+                AddRefreshList();
+            }
 
         }
 
@@ -78,9 +102,18 @@ namespace Library.BookRentsForms
             var selectedBookRent = booksRentNotActiveListBox.SelectedItem as BookRent;
             if (bookRentActiveListBox.SelectedItem != null)
                 selectedBookRent = bookRentActiveListBox.SelectedItem as BookRent;
-            var bookRentDetailsForm = new BookRentDetailsForm(BookRentRepository, BookRepository, StudentRepository) { SelectedBookRent = selectedBookRent };
-            bookRentDetailsForm.SetText();
-            bookRentDetailsForm.Show();
+            if (selectedBookRent == null)
+            {
+                var errorForm = new ErrorForm("You need to select bookrent.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookRentDetailsForm = new BookRentDetailsForm(BookRentRepository, BookRepository, StudentRepository)
+                    {SelectedBookRent = selectedBookRent};
+                bookRentDetailsForm.SetText();
+                bookRentDetailsForm.ShowDialog();
+            }
 
         }
     }

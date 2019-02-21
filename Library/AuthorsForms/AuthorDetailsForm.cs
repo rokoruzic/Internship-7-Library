@@ -26,7 +26,7 @@ namespace Library.AuthorsForms
 
         public void AddRefreshList()
         {
-            authorNameTextBox.Text = SelectedAuthor.ToString();
+            authorNameLabel.Text = SelectedAuthor.ToString();
             BookRepository.GetAllBooks().Where(x=>x.Author.AuthorId==SelectedAuthor.AuthorId).ToList().ForEach(x=>authorBooksListBox.Items.Add(x.PrintWithoutAuthor()));
             if (authorBooksListBox.Items.Count == 0) authorBooksListBox.Items.Add("Author has no books.");
         }

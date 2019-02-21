@@ -30,13 +30,22 @@ namespace Library.PublishersForms
 
         private void PublisherEditButtonClick(object sender, EventArgs e)
         {
-            var publisherToEdit = new Publisher();
-            publisherToEdit.Name = publisherNameTextBox.Text;
-            publisherToEdit.PublisherId = SelectedPublisher.PublisherId;
-            publisherToEdit.Books = SelectedPublisher.Books;
-            PublisherRepository.EditPublisher(publisherToEdit);
-            Close();
-
+            if (string.IsNullOrEmpty(publisherNameTextBox.Text))
+            {
+                var errorForm = new ErrorForm("You need to fill al boxes");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var publisherToEdit = new Publisher
+                {
+                    Name = publisherNameTextBox.Text,
+                    PublisherId = SelectedPublisher.PublisherId,
+                    Books = SelectedPublisher.Books
+                };
+                PublisherRepository.EditPublisher(publisherToEdit);
+                Close();
+            }
         }
     }
 }

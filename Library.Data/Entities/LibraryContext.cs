@@ -26,10 +26,7 @@ namespace Library.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             
            
-
-          
             modelBuilder.Entity<BookRent>()
                 .HasOne(bc => bc.Book)
                 .WithMany(b => b.BookRents)
@@ -39,49 +36,46 @@ namespace Library.Data.Entities
                 .WithMany(c => c.BookRents)
                 .HasForeignKey(bc => bc.StudentId);
 
-            //modelBuilder.Entity<Publisher>().HasData(new
-            //{
-            //    PublisherId = 1,
-            //    Name = "Croatia"
-            //});
-            //modelBuilder.Entity<Book>().HasData(new
-            //{
-            //    BookId = 1,
-            //    Name = "Milenium",
-            //    Pages = 123,
-            //    Genre = BookGenre.Comedy,
-            //    PublisherId = 1,
-            //    IsRentActive = true
-            //});
+            modelBuilder.Entity<Publisher>().HasData(new
+            {
+                PublisherId = 1,
+                Name = "Croatia"
+            });
+            modelBuilder.Entity<Book>().HasData(new
+            {
+                BookId = 1,
+                Name = "Milenium",
+                Pages = 123,
+                Genre = BookGenre.Comedy,
+                PublisherId = 1,
+                IsRentActive = true
+            });
 
-            //modelBuilder.Entity<Student>().HasData(new
-            //{
-            //    StudentId = 1,
-            //    FirstName = "Kristian",
-            //    LastName = "Zolo",
-            //    DateOfBirth = DateTime.Now.AddYears(-19),
-            //    Class = "2.b",
-            //    Gender = Gender.Male,
-            //    IsRentActive = true
-            //});
-            //modelBuilder.Entity<Author>().HasData(new
-            //{
-            //    AuthorId = 1,
-            //    FirstName = "Jure",
-            //    LastName = "Radalj",
+            modelBuilder.Entity<Student>().HasData(new
+            {
+                StudentId = 1,
+                FirstName = "Kristian",
+                LastName = "Zolo",
+                DateOfBirth = DateTime.Now.AddYears(-19),
+                Class = "2.b",
+                Gender = Gender.Male,
+                IsRentActive = true
+            });
+            modelBuilder.Entity<Author>().HasData(new
+            {
+                AuthorId = 1,
+                FirstName = "Jure",
+                LastName = "Radalj",
 
-            //});
-            //modelBuilder.Entity<AuthorBook>().HasData(new
-            //{
-            //    AuthorId = 1,
-            //    BookId = 1,
-            //});
-            //modelBuilder.Entity<BookRent>().HasData(new
-            //{
-            //    BookId = 1,
-            //    StudentId = 1,
-            //    DateOfRent = new DateTime(2019 / 1 / 20)
-            //});
+            });
+           
+            modelBuilder.Entity<BookRent>().HasData(new
+            {
+                BookRentId =1,
+                BookId = 1,
+                StudentId = 1,
+                DateOfRent = DateTime.Now.AddYears(-1)
+            });
         }
        
 

@@ -30,7 +30,7 @@
         {
             this.publisherBooksListBox = new System.Windows.Forms.ListBox();
             this.exitButton = new System.Windows.Forms.Button();
-            this.publisherNameTextBox = new System.Windows.Forms.TextBox();
+            this.publisherDetailsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // publisherBooksListBox
@@ -52,19 +52,21 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButtonClick);
             // 
-            // publisherNameTextBox
+            // publisherDetailsLabel
             // 
-            this.publisherNameTextBox.Location = new System.Drawing.Point(36, 75);
-            this.publisherNameTextBox.Name = "publisherNameTextBox";
-            this.publisherNameTextBox.Size = new System.Drawing.Size(315, 22);
-            this.publisherNameTextBox.TabIndex = 2;
+            this.publisherDetailsLabel.AutoSize = true;
+            this.publisherDetailsLabel.Location = new System.Drawing.Point(36, 31);
+            this.publisherDetailsLabel.Name = "publisherDetailsLabel";
+            this.publisherDetailsLabel.Size = new System.Drawing.Size(46, 17);
+            this.publisherDetailsLabel.TabIndex = 3;
+            this.publisherDetailsLabel.Text = "label1";
             // 
             // PublisherDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.publisherNameTextBox);
+            this.Controls.Add(this.publisherDetailsLabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.publisherBooksListBox);
             this.Name = "PublisherDetailsForm";
@@ -78,6 +80,6 @@
 
         private System.Windows.Forms.ListBox publisherBooksListBox;
         private System.Windows.Forms.Button exitButton;
-        private System.Windows.Forms.TextBox publisherNameTextBox;
+        private System.Windows.Forms.Label publisherDetailsLabel;
     }
 }

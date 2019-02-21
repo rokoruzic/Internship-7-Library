@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Library.Data.Entities;
 using Library.Data.Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +17,7 @@ namespace Library.Domain.Repositories
         {
             return _libraryContext.Books.Include(x=>x.BookRents).Include(x=>x.Author).Include(x=>x.Publisher).ToList();
         }
-        public Book GetBook(int id)
-        {
-           
-            return _libraryContext.Books.FirstOrDefault(x => x.BookId == id);
-        }
+       
         public bool AddBook(Book bookToAdd)
         {
             if (bookToAdd == null) return false;
@@ -43,13 +36,10 @@ namespace Library.Domain.Repositories
             editedBook.PublisherId = bookToEdit.PublisherId;
             editedBook.Author = bookToEdit.Author;
             editedBook.Genre = bookToEdit.Genre;
-
             _libraryContext.SaveChanges();
             return true;
 
         }
-     
-
         public bool RemoveBook(int bookId)
         {
             var bookToRemove = _libraryContext.Books.FirstOrDefault(x => x.BookId == bookId);

@@ -184,6 +184,18 @@
     <Compile Include="Migrations\20190219142222_ChangedAuthorToBookConnectionToOneToMany.designer.cs">
       <DependentUpon>20190219142222_ChangedAuthorToBookConnectionToOneToMany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190221200422_FinalMigration.cs" />
+    <Compile Include="Migrations\20190221200422_FinalMigration.designer.cs">
+      <DependentUpon>20190221200422_FinalMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190221201019_SeededCorrectData.cs" />
+    <Compile Include="Migrations\20190221201019_SeededCorrectData.designer.cs">
+      <DependentUpon>20190221201019_SeededCorrectData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190221202833_addedStringExtensionsToModels.cs" />
+    <Compile Include="Migrations\20190221202833_addedStringExtensionsToModels.designer.cs">
+      <DependentUpon>20190221202833_addedStringExtensionsToModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,7 +203,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Library.Infrastructure\Library.Infrastructure.csproj">
+      <Project>{a3e52fed-23f5-4d47-8511-6b35b69cd8c2}</Project>
+      <Name>Library.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities.Enums;
 using Library.Data.Entities.Models;
@@ -16,8 +9,6 @@ namespace Library.StudentsForms
     public partial class StudentsCreateForm : Form
     {
         public StudentRepository StudentRepository { get; set; }
-        public BookRentRepository BookRentRepository { get; set; }
-
         public StudentsCreateForm(StudentRepository studentRepository)
         {
             InitializeComponent();
@@ -26,18 +17,33 @@ namespace Library.StudentsForms
             {
                 genderComboBox.Items.Add(gender);
             }
-
+            dateOfBirthDateTimePicker.MaxDate=DateTime.Now.AddYears(-10);
+                
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            var studentToAdd=new Student();
-            studentToAdd.Class = classTextBox.Text;
-            studentToAdd.FirstName = firstNameTextBox.Text;
-            studentToAdd.LastName = lastNameTextBox.Text;
-            studentToAdd.Gender = (Gender) genderComboBox.SelectedItem;
-            studentToAdd.DateOfBirth = dateOfBirthDateTimePicker.Value;
-            StudentRepository.AddStudent(studentToAdd);
+            if (string.IsNullOrEmpty(firstNameTextBox.Text) || string.IsNullOrEmpty(classLetterTextBox.Text)
+                                                            || string.IsNullOrEmpty(lastNameTextBox.Text) ||
+                                                            genderComboBox.SelectedItem == null)
+            {
+                var errorForm =  new ErrorForm("You need to fill all boxes.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+
+                var studentToAdd = new Student
+                {
+                    Class = $"{classNumberNumUpDown.Value.ToString()}.{classLetterTextBox.Text}",
+                    FirstName = firstNameTextBox.Text,
+                    LastName = lastNameTextBox.Text,
+                    Gender = (Gender) genderComboBox.SelectedItem,
+                    DateOfBirth = dateOfBirthDateTimePicker.Value
+                };
+                StudentRepository.AddStudent(studentToAdd);
+                Close();
+            }
         }
     }
 }

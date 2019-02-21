@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Library.Data.Entities;
 using Library.Data.Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +15,7 @@ namespace Library.Domain.Repositories
 
         private readonly LibraryContext _libraryContext;
 
-        public Student GetStudent(int id)
-        {
-            return _libraryContext.Students.Include(x=>x.BookRents).FirstOrDefault(x=>x.StudentId==id );
-        }
+       
         public List<Student> GetAllStudents()
         {
             return _libraryContext.Students.Include(x => x.BookRents).ToList();
@@ -52,25 +45,13 @@ namespace Library.Domain.Repositories
             editedStudent.Class = studentToEdit.Class;
             editedStudent.DateOfBirth = studentToEdit.DateOfBirth;
             editedStudent.StudentId = studentToEdit.StudentId;
-            //editedStudent.BookRents = studentToEdit.BookRents;
-            //_libraryContext.Attach(studentToEdit.BookRents);
-
+            editedStudent.BookRents = studentToEdit.BookRents;
             _libraryContext.SaveChanges();
             return true;
 
         }
 
-       
-
-        public int GetNewId()
-        {
-            return _libraryContext.Students.Count() + 1;
-        }
-
-        //public bool IsRentActive(Student studentToCheckRent,List<BookRent> bookRents)
-        //{
-        //    return studentToCheckRent.IsRentActive && bookRents.FirstOrDefault(x=>x.StudentId==studentToCheckRent.StudentId).DateOfReturn==null;
-        //}
+      
        
     }
 }

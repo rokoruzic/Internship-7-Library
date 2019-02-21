@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -25,7 +19,6 @@ namespace Library.BooksForms
             BookRepository = bookRepository;
             AuthorRepository = authorRepository;
             PublisherRepository = publisherRepository;
-            AddRefreshList();
 
         }
 
@@ -43,18 +36,25 @@ namespace Library.BooksForms
             var newBooksNotRentedBooksUnion = notRentedBooks.Union(newBooks).ToList();
             rentedBooks.ForEach(x=>rentedBooksListBox.Items.Add(x));
             newBooksNotRentedBooksUnion.ForEach(x=>notRentedListBox.Items.Add(x));
-            rentedBooksLabel.Text = $"Currently rented books: {rentedBooks.Count} ";
-            notRentedBooksLabel.Text = $"Currently available books: {newBooksNotRentedBooksUnion.Count}";
+            rentedBooksLabel.Text = $@"Currently rented books: {rentedBooks.Count} ";
+            notRentedBooksLabel.Text = $@"Currently available books: {newBooksNotRentedBooksUnion.Count}";
 
         }
 
         private void AddBookButtonClick(object sender, EventArgs e)
         {
-            if (AuthorRepository.GetAllAuthors().Count == 0) return;
-            var bookCreateForm = new BookCreateForm(BookRepository,AuthorRepository,PublisherRepository);
-            bookCreateForm.AddRefreshList();
-            bookCreateForm.ShowDialog();
-            AddRefreshList();
+            if (AuthorRepository.GetAllAuthors().Count == 0 || PublisherRepository.GetAllPublishers().Count==0)
+            {
+                var errorForm = new ErrorForm("There is no author or publisher in database so you cant create book.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookCreateForm = new BookCreateForm(BookRepository, AuthorRepository, PublisherRepository);
+                bookCreateForm.AddRefreshList();
+                bookCreateForm.ShowDialog();
+                AddRefreshList();
+            }
         }
 
         private void EditBookButtonClick(object sender, EventArgs e)
@@ -62,12 +62,20 @@ namespace Library.BooksForms
             var selectedBook = notRentedListBox.SelectedItem as Book;
             if (rentedBooksListBox.SelectedItem != null)
                 selectedBook = rentedBooksListBox.SelectedItem as Book;
-            if (selectedBook == null) return;
-            var bookEditForm = new BookEditForm(BookRepository, AuthorRepository, PublisherRepository){SelectedBook = selectedBook};
-            bookEditForm.SetText();
-            bookEditForm.AddRefreshList();
-            bookEditForm.Show();
-            AddRefreshList();
+            if (selectedBook == null)
+            {
+               var errorForm = new ErrorForm("You need to select book");
+               errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookEditForm = new BookEditForm(BookRepository, AuthorRepository, PublisherRepository)
+                    {SelectedBook = selectedBook};
+                bookEditForm.SetText();
+                bookEditForm.AddRefreshList();
+                bookEditForm.ShowDialog();
+                AddRefreshList();
+            }
         }
 
         private void NotRentedListBoxClick(object sender, EventArgs e)
@@ -85,9 +93,16 @@ namespace Library.BooksForms
             var selectedBook = notRentedListBox.SelectedItem as Book;
             if (rentedBooksListBox.SelectedItem != null)
                 selectedBook = rentedBooksListBox.SelectedItem as Book;
-            if (selectedBook == null) return;
-            BookRepository.RemoveBook(selectedBook.BookId);
-            AddRefreshList();
+            if (selectedBook == null)
+            {
+                var errorForm = new ErrorForm("You need to select book");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                BookRepository.RemoveBook(selectedBook.BookId);
+                AddRefreshList();
+            }
 
         }
 
@@ -96,12 +111,19 @@ namespace Library.BooksForms
             var selectedBook = notRentedListBox.SelectedItem as Book;
             if (rentedBooksListBox.SelectedItem != null)
                 selectedBook = rentedBooksListBox.SelectedItem as Book;
-            if (selectedBook == null) return;
-            var bookDetailsForm = new BookDetailsForm(BookRentRepository,BookRepository){SelectedBook=selectedBook};
-            bookDetailsForm.SetText();
-            bookDetailsForm.AddRefreshList();
-            bookDetailsForm.Show();
-            
+            if (selectedBook == null)
+            {
+                var errorForm = new ErrorForm("You need to select book");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+                var bookDetailsForm = new BookDetailsForm(BookRentRepository, BookRepository)
+                    {SelectedBook = selectedBook};
+                bookDetailsForm.SetText();
+                bookDetailsForm.AddRefreshList();
+                bookDetailsForm.ShowDialog();
+            }
         }
     }
 }

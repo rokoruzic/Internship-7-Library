@@ -4,14 +4,16 @@ using Library.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Data.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20190221201019_SeededCorrectData")]
+    partial class SeededCorrectData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,7 @@ namespace Library.Data.Migrations
                         {
                             BookRentId = 1,
                             BookId = 1,
-                            DateOfRent = new DateTime(2018, 2, 21, 21, 28, 32, 644, DateTimeKind.Local).AddTicks(7962),
+                            DateOfRent = new DateTime(2018, 2, 21, 21, 10, 18, 921, DateTimeKind.Local).AddTicks(8997),
                             StudentId = 1
                         });
                 });
@@ -154,7 +156,7 @@ namespace Library.Data.Migrations
                         {
                             StudentId = 1,
                             Class = "2.b",
-                            DateOfBirth = new DateTime(2000, 2, 21, 21, 28, 32, 642, DateTimeKind.Local).AddTicks(7909),
+                            DateOfBirth = new DateTime(2000, 2, 21, 21, 10, 18, 920, DateTimeKind.Local).AddTicks(3949),
                             FirstName = "Kristian",
                             Gender = 1,
                             LastName = "Zolo"

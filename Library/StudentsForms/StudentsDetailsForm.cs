@@ -26,21 +26,18 @@ namespace Library.StudentsForms
 
         public void AddRefreshList()
         {
-            var a = BookRentRepository.GetAllBookRents().Where(x => x.StudentId == SelectedStudent.StudentId).ToList();
-            a.ForEach(x=>bookRentsListBox.Items.Add(x));
-            var b = a.Where(x => x.DateOfReturn == null).ToList();
-            if (b.Count>0 ) isRentActiveTextBox.Text = "Rent  active";
-            else isRentActiveTextBox.Text = "Rent not active";
+            var bookRentsOfSelectedStudents
+                = BookRentRepository.GetAllBookRents().Where(x => x.StudentId == SelectedStudent.StudentId).ToList();
+            bookRentsOfSelectedStudents.ForEach(x=>bookRentsListBox.Items.Add(x));
+            var notReturnedBookRentsOfSelectedStudent = bookRentsOfSelectedStudents.Where(x => x.DateOfReturn == null).ToList();
+            isRentActiveLabel.Text = notReturnedBookRentsOfSelectedStudent.Count>0 ? "Rent  active" : "Rent not active";
+            studentDetailsLabel.Text = SelectedStudent.Print();
 
-            //foreach (var bookRent in a)
-            //{
-            //    if (bookRent.DateOfReturn == null) isRentActiveTextBox.Text = "Rent is active";
-            //}
         }
 
-        public void SetText()
+        private void StudentDetailsExitButtonClick(object sender, EventArgs e)
         {
-
+            Close();
         }
     }
 }

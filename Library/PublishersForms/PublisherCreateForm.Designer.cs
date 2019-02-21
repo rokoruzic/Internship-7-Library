@@ -30,6 +30,7 @@
         {
             this.publisherAddButton = new System.Windows.Forms.Button();
             this.publisherNameTextBox = new System.Windows.Forms.TextBox();
+            this.publisherNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // publisherAddButton
@@ -49,11 +50,21 @@
             this.publisherNameTextBox.Size = new System.Drawing.Size(306, 22);
             this.publisherNameTextBox.TabIndex = 1;
             // 
+            // publisherNameLabel
+            // 
+            this.publisherNameLabel.AutoSize = true;
+            this.publisherNameLabel.Location = new System.Drawing.Point(210, 74);
+            this.publisherNameLabel.Name = "publisherNameLabel";
+            this.publisherNameLabel.Size = new System.Drawing.Size(85, 17);
+            this.publisherNameLabel.TabIndex = 2;
+            this.publisherNameLabel.Text = "Enter name:";
+            // 
             // PublisherCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.publisherNameLabel);
             this.Controls.Add(this.publisherNameTextBox);
             this.Controls.Add(this.publisherAddButton);
             this.Name = "PublisherCreateForm";
@@ -67,5 +78,6 @@
 
         private System.Windows.Forms.Button publisherAddButton;
         private System.Windows.Forms.TextBox publisherNameTextBox;
+        private System.Windows.Forms.Label publisherNameLabel;
     }
 }

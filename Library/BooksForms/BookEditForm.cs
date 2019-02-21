@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Library.BookRentsForms;
 using Library.Data.Entities.Enums;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -40,43 +33,62 @@ namespace Library.BooksForms
         public void SetText()
         {
             bookNameTextBox.Text = SelectedBook.Name;
-            publishersComboBox.Text = SelectedBook.Publisher.Name;
-            authorsComboBox.Text = SelectedBook.Author.ToString();
-            genresComboBox.Text = SelectedBook.Genre.ToString();
 
         }
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            var bookToEdit = new Book();
-            bookToEdit.Author = authorsComboBox.SelectedItem as Author;
-            bookToEdit.BookId = SelectedBook.BookId;
-            bookToEdit.Publisher = publishersComboBox.SelectedItem as Publisher;
-            bookToEdit.Genre = (BookGenre)genresComboBox.SelectedItem;
-            bookToEdit.Name = bookNameTextBox.Text;
-            bookToEdit.Pages = (int)bookPagesNumUpDown.Value;
-            bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
-            BookRepository.EditBook(bookToEdit);
-            Close();
-            
+            if (string.IsNullOrEmpty(bookNameTextBox.Text) || publishersComboBox.SelectedItem == null ||
+                authorsComboBox.SelectedItem == null || genresComboBox.SelectedItem == null)
+            {
+                var errorForm = new ErrorForm("you need to fill all boxes.");
+                errorForm.ShowDialog();
+            }
+            else
+            {
+
+                var bookToEdit = new Book
+                {
+                    Author = authorsComboBox.SelectedItem as Author,
+                    BookId = SelectedBook.BookId,
+                    Publisher = publishersComboBox.SelectedItem as Publisher,
+                    Genre = (BookGenre) genresComboBox.SelectedItem,
+                    Name = bookNameTextBox.Text,
+                    Pages = (int) bookPagesNumUpDown.Value
+                };
+                bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
+                BookRepository.EditBook(bookToEdit);
+                Close();
+            }
+
         }
 
         private void SaveAllCopiesButtonClick(object sender, EventArgs e)
         {
-            
-            var bookCopies = BookRepository.GetAllBooks().Where(x => x.Name == SelectedBook.Name).ToList();
-
-            foreach (var bookToEdit in bookCopies)
+            if (string.IsNullOrEmpty(bookNameTextBox.Text) || publishersComboBox.SelectedItem == null ||
+                authorsComboBox.SelectedItem == null || genresComboBox.SelectedItem == null)
             {
-                
-                bookToEdit.Author = authorsComboBox.SelectedItem as Author;
-                bookToEdit.Publisher = publishersComboBox.SelectedItem as Publisher;
-                bookToEdit.Genre = (BookGenre)genresComboBox.SelectedItem;
-                bookToEdit.Name = bookNameTextBox.Text;
-                bookToEdit.Pages = (int)bookPagesNumUpDown.Value;
-                bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
+                var errorForm = new ErrorForm("you need to fill all boxes.");
+                errorForm.ShowDialog();
             }
-            bookCopies.ForEach(x=>BookRepository.EditBook(x));
-            Close();
+            else
+            {
+
+                var bookCopies = BookRepository.GetAllBooks().Where(x => x.Name == SelectedBook.Name).ToList();
+
+                foreach (var bookToEdit in bookCopies)
+                {
+
+                    bookToEdit.Author = authorsComboBox.SelectedItem as Author;
+                    bookToEdit.Publisher = publishersComboBox.SelectedItem as Publisher;
+                    bookToEdit.Genre = (BookGenre) genresComboBox.SelectedItem;
+                    bookToEdit.Name = bookNameTextBox.Text;
+                    bookToEdit.Pages = (int) bookPagesNumUpDown.Value;
+                    bookToEdit.PublisherId = bookToEdit.Publisher.PublisherId;
+                }
+
+                bookCopies.ForEach(x => BookRepository.EditBook(x));
+                Close();
+            }
         }
     }
 }

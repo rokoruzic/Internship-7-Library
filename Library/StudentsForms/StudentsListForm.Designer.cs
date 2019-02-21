@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Library.StudentsForms
 {
     partial class StudentsListForm
     {

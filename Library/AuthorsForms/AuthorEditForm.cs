@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Library.Data.Entities.Models;
 using Library.Domain.Repositories;
@@ -30,11 +23,18 @@ namespace Library.AuthorsForms
 
         private void EditAuthorButtonClick(object sender, EventArgs e)
         {
-            var authorToEdit = new Author();
-            authorToEdit.AuthorId = SelectedAuthor.AuthorId;
-            authorToEdit.FirstName = SelectedAuthor.FirstName;
-            authorToEdit.LastName = SelectedAuthor.LastName;
-            authorToEdit.Books = SelectedAuthor.Books;
+            if (string.IsNullOrEmpty(authorFirstNameTextBox.Text) || string.IsNullOrEmpty(authorLastNameTextBox.Text))
+            {
+                var errorForm = new ErrorForm("You need to fill all boxes");
+                errorForm.ShowDialog();
+            }
+            var authorToEdit = new Author
+            {
+                AuthorId = SelectedAuthor.AuthorId,
+                FirstName = SelectedAuthor.FirstName,
+                LastName = SelectedAuthor.LastName,
+                Books = SelectedAuthor.Books
+            };
             AuthorRepository.EditAuthor(authorToEdit);
             Close();
         }
